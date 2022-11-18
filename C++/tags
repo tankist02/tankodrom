@@ -1,0 +1,40 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+GreaterThan	count.cpp	/^    GreaterThan(int n) : n_(n) {}$/;"	f	class:GreaterThan
+GreaterThan	count.cpp	/^class GreaterThan$/;"	c	file:
+Man	print.cpp	/^struct Man$/;"	s	file:
+S	move.cpp	/^    S(S&& s) { s_ = std::move(s.s_); }$/;"	f	struct:S
+S	move.cpp	/^    S(char const* s = "") : s_(s) {}$/;"	f	struct:S
+S	move.cpp	/^struct S$/;"	s	file:
+Widget	decltype.cpp	/^struct Widget$/;"	s	file:
+age_	print.cpp	/^    int age_;$/;"	m	struct:Man	file:
+bar	decltype.cpp	/^    int bar() const { return i_; }$/;"	f	struct:Widget
+f1	decltype.cpp	/^decltype(auto) f1() { int x = 1; return x; }$/;"	f
+foo	decltype.cpp	/^    int foo() { return i_; }$/;"	f	struct:Widget
+func	auto.cpp	/^std::array<int, 3> func(int x)$/;"	f
+main	any.cpp	/^int main(int \/*argc*\/, char** \/*argv*\/)$/;"	f
+main	arr.cpp	/^int main()$/;"	f
+main	auto.cpp	/^int main()$/;"	f
+main	cont.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	count.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	decltype.cpp	/^int main()$/;"	f
+main	fs.cpp	/^int main(int argc, char** argv)$/;"	f
+main	modern.cpp	/^int main()$/;"	f
+main	move.cpp	/^int main()$/;"	f
+main	print.cpp	/^int main()$/;"	f
+main	sum.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	var.cpp	/^int main(int, char**)$/;"	f
+n_	count.cpp	/^    int n_;$/;"	m	class:GreaterThan	file:
+name_	print.cpp	/^    std::string name_;$/;"	m	struct:Man	file:
+operator ()	count.cpp	/^    bool operator()(T const& i) const { return i > n_; }$/;"	f	class:GreaterThan
+operator <<	any.cpp	/^std::ostream& operator<<(std::ostream& os, std::pair<int, int> const& p)$/;"	f
+operator <<	cont.cpp	/^std::ostream& operator<<(std::ostream& os, std::pair<int, std::string> const& p)$/;"	f
+operator <<	print.cpp	/^std::ostream& operator<<(std::ostream& os, Man const& m) { return m.save(os); }$/;"	f
+operator <<	print.cpp	/^std::ostream& operator<<(std::ostream& os, std::pair<int, int> const& p) { os << p.first << "," << p.second; return os; }$/;"	f
+s_	move.cpp	/^    std::string s_;$/;"	m	struct:S	file:
+save	print.cpp	/^    std::ostream& save(std::ostream& os) const$/;"	f	struct:Man
+weight_	print.cpp	/^    double weight_;$/;"	m	struct:Man	file:

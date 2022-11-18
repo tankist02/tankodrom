@@ -1,0 +1,6 @@
+# Ignore build artefacts
+bin/
+obj/
+target
+*.out
+*.o
