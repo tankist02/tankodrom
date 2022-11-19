@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -13,14 +14,10 @@ struct Shoe {
 
 typedef std::vector<Shoe> Shoes;
 
-Shoes shoes_in_size(Shoes const& shoes, int size) {
-    Shoes res;
-    for (auto const & shoe : shoes) {
-        if (shoe.size == size) {
-            res.push_back(shoe);
-        }
-    }
-    return res;
+Shoes& shoes_in_size(Shoes& shoes, int size) {
+    auto it = std::remove_if(begin(shoes), end(shoes), [size](Shoe const& s) { return s.size != size; });
+    shoes.erase(it, end(shoes));
+    return shoes;
 }
 
 int main(int argc, char* argv[])
