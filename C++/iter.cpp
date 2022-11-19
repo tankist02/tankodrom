@@ -6,18 +6,12 @@
 struct Shoe {
     int size;
     std::string style;
-    std::ostream& print(std::ostream& os = std::cout) const {
-        os << "size: " << size << ", style: " << style << "\n";
-        return os;
-    }
 };
 
 typedef std::vector<Shoe> Shoes;
 
-Shoes& shoes_in_size(Shoes& shoes, int size) {
-    auto it = std::remove_if(begin(shoes), end(shoes), [size](Shoe const& s) { return s.size != size; });
-    shoes.erase(it, end(shoes));
-    return shoes;
+void shoes_in_size(Shoes& shoes, int size) {
+    shoes.erase(std::remove_if(begin(shoes), end(shoes), [size](Shoe const& s) { return s.size != size; }), end(shoes));
 }
 
 int main(int argc, char* argv[])
@@ -40,12 +34,12 @@ int main(int argc, char* argv[])
             {10, "boot4"}, 
             {9, "boot"}, 
             {10, "boot5"} };
-        Shoes res = shoes_in_size(shoes, 10);
+        shoes_in_size(shoes, 10);
         if (l == 0) {
-            for (auto const& shoe : res) {
-                shoe.print();
+            for (auto const& shoe : shoes) {
+                std::cout << shoe.size << ", " << shoe.style << "\n";
             }
-            res.back().print();
+            std::cout << shoes.back().style << "\n";
         }
         ++counter;
     }

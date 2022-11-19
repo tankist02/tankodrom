@@ -11,15 +11,6 @@ fn shoes_in_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
 }
 
 fn main() {
-    /*println!("Hello, iter!");
-
-    let v = vec![1, 2, 3];
-    let total: i32 = v.iter().sum();
-    println!("total: {}", total);
-
-    let v2: Vec<_> = v.iter().map(|x| x + 1).collect();
-    println!("v2: {:?}", v2);*/
-  
     let args: Vec<String> = env::args().collect();
     let mut loops: i32 = 1000;
     if args.len() > 1 {
