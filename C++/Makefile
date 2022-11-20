@@ -14,7 +14,7 @@ else
 $(error: Invalid BUILD_TYPE: $(BUILD_TYPE))
 endif
 
-#LDFLAGS += -lfmt
+LDFLAGS += -lfmt
 
 clean:
 	find . -type f -executable | xargs rm -f

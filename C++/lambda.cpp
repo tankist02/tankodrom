@@ -1,4 +1,7 @@
 #include <iostream>
+#include <list>
+#include <map>
+#include <set>
 #include <vector>
 #include <functional>
 #include <string_view>
@@ -69,6 +72,18 @@ int main(int argc, char* argv[])
 
     auto n = lambda_example(5);
     std::cout << "n: " << n << std::endl;
+
+    std::vector<int> v {1, 2, 3};
+    std::for_each(begin(v), end(v), [](int i) { std::cout << i << ", "; });
+
+    for (auto const& i : std::vector{1, 2, 3}) std::cout << i << "\n";
+    std::cout << "\n";
+    for (auto const& i : std::list{1, 2, 3}) std::cout << i << "\n";
+    std::cout << "\n";
+    for (auto const& i : std::set{1, 1, 2, 2, 3, 4}) std::cout << i << ",";
+    std::cout << "\n";
+    for (auto const& i : std::map<int, std::string>{{1, "one"}, {2, "two"}, {3, "three"}}) std::cout << i.first << "=" << i.second << "\n";
+    std::cout << "\n";
 
     return 0;
 }

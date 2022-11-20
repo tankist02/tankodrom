@@ -6,6 +6,10 @@
 struct Shoe {
     int size;
     std::string style;
+    std::ostream& save(std::ostream& os) const {
+        os << size << ", " << style << "\n";
+        return os;
+    }
 };
 
 typedef std::vector<Shoe> Shoes;
@@ -37,7 +41,8 @@ int main(int argc, char* argv[])
         shoes_in_size(shoes, 10);
         if (l == 0) {
             for (auto const& shoe : shoes) {
-                std::cout << shoe.size << ", " << shoe.style << "\n";
+                //std::cout << shoe.size << ", " << shoe.style << "\n";
+                shoe.save(std::cout);
             }
             std::cout << shoes.back().style << "\n";
         }
