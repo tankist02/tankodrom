@@ -14,8 +14,7 @@ public class Main {
         
         public String toString() {
             try {
-                StringBuffer sb = new StringBuffer();
-                return save(sb).toString();
+                return save(new StringBuffer()).toString();
             } catch(IOException ioe) {
                 // ignore
                 return "IO exception: "+ioe;
@@ -44,7 +43,7 @@ public class Main {
         return Stream.of(arrayOfShoes).filter(shoe -> shoe.size == size).collect(Collectors.toList());
     }
     
-    public static int main(String ...args) {
+    public static void main(String ...args) {
         Main main = new Main();
         int iters = 1000;
         if (args.length > 0)
@@ -57,7 +56,6 @@ public class Main {
                 }
             });
         System.out.printf("Done with %d iteration(s)\n", iters);
-        return 0;
     }
     
 }
