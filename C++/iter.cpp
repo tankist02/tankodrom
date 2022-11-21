@@ -40,10 +40,9 @@ int main(int argc, char* argv[])
                 //std::cout << shoe.size << ", " << shoe.style << "\n";
                 shoe.save(std::cout);
             }
-            std::cout << shoes.back().style << "\n";
         }
         counter += shoes.size();
     }
-    std::cout << "counter: " << counter << std::endl;
+    std::cout << "counter: " << counter << ", l: " << loops << std::endl;
 }
 

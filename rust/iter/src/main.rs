@@ -1,9 +1,14 @@
 use std::env;
 
-#[derive(Debug)]
 struct Shoe {
     size: u32,
     style: String,
+}
+
+impl Shoe {
+    fn print(&self) {
+        println!("{}, {}", self.size, self.style);
+    }
 }
 
 fn shoes_in_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
@@ -34,8 +39,9 @@ fn main() {
     
         let in_my_size = shoes_in_size(shoes, 10);
         if l == 0 {
-            println!("in_my_size: {:?}", in_my_size);
-            println!("last style: {:?}", in_my_size.last().unwrap().style);
+            for s in &in_my_size {
+                s.print();
+            }
         }
         counter += in_my_size.len();
         l += 1;
