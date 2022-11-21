@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
     
-    static class Shoe {
+    class Shoe {
         int size;
         String style;
         Appendable save(Appendable os) throws IOException {
@@ -57,5 +57,4 @@ public class Main {
             });
         System.out.printf("Done with %d iteration(s)\n", iters);
     }
-    
 }
