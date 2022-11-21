@@ -31,8 +31,17 @@ int main(int argc, char* argv[])
     for (int l = 0; l < loops; ++l) {
         Shoes shoes;
         for (int i = 0; i < shoes_num; ++i) {
+            static char const* const styles[] = {
+                "boot",
+                "sneaker",
+                "sandal",
+                "pump",
+                "highheel"
+            };
+
             int size = i % 12;
-            shoes.push_back(Shoe(size, "boot" + std::to_string(size)));
+            char const* style = styles[i % 5];
+            shoes.push_back(Shoe(size, style + std::to_string(size)));
         }
         shoes_in_size(shoes, 10);
         if (l == 0) {
