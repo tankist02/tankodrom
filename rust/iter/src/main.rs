@@ -19,18 +19,18 @@ fn main() {
     let mut counter = 0;
     let mut l = 0;
     while l < loops {
-        let shoes = vec![ 
-            Shoe {size: 10, style: String::from("sneaker")},
-            Shoe {size: 13, style: String::from("sandal")},
-            Shoe {size: 10, style: String::from("boot")},
-            Shoe {size: 10, style: String::from("boot2")},
-            Shoe {size: 12, style: String::from("boot")},
-            Shoe {size: 10, style: String::from("boot3")},
-            Shoe {size: 11, style: String::from("boot")},
-            Shoe {size: 10, style: String::from("boot4")},
-            Shoe {size: 9, style: String::from("boot")},
-            Shoe {size: 10, style: String::from("boot5")},
-        ];
+        let mut shoes: Vec<Shoe> = Vec::new();
+        let shoes_num = 200;
+        let mut i = 0;
+        while i < shoes_num {
+            let s = i % 12;
+            let mut st = String::from("boot");
+            let str: String = s.to_string();
+            st.push_str(&str);
+            let shoe = Shoe { size: s, style: st };
+            shoes.push(shoe);
+            i += 1;
+        }
     
         let in_my_size = shoes_in_size(shoes, 10);
         if l == 0 {

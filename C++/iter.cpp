@@ -4,6 +4,7 @@
 #include <vector>
 
 struct Shoe {
+    Shoe(int s, std::string const& st) : size(s), style(st) {}
     int size;
     std::string style;
     std::ostream& save(std::ostream& os) const {
@@ -26,18 +27,13 @@ int main(int argc, char* argv[])
     }
     
     int counter = 0;
+    int shoes_num = 200;
     for (int l = 0; l < loops; ++l) {
-        Shoes shoes { 
-            {10, "sneaker"}, 
-            {13, "sandal"}, 
-            {10, "boot"}, 
-            {10, "boot2"}, 
-            {12, "boot"}, 
-            {10, "boot3"}, 
-            {11, "boot"}, 
-            {10, "boot4"}, 
-            {9, "boot"}, 
-            {10, "boot5"} };
+        Shoes shoes;
+        for (int i = 0; i < shoes_num; ++i) {
+            int size = i % 12;
+            shoes.push_back(Shoe(size, "boot" + std::to_string(size)));
+        }
         shoes_in_size(shoes, 10);
         if (l == 0) {
             for (auto const& shoe : shoes) {
@@ -46,7 +42,7 @@ int main(int argc, char* argv[])
             }
             std::cout << shoes.back().style << "\n";
         }
-        ++counter;
+        counter += shoes.size();
     }
     std::cout << "counter: " << counter << std::endl;
 }
