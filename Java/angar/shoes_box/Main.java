@@ -43,15 +43,18 @@ public class Main {
     public static void main(String ...args) {
         Main main = new Main();
         int iters = 1000;
+        long found_num = 0;
         if (args.length > 0)
             iters = Integer.valueOf(args[0]);
-        IntStream.range(0, iters)
-            .forEach(index -> {
+            found_num = IntStream.range(0, iters)
+               .map(x -> {
                 List<Shoe> myshoes = main.process(10);
-                if (index == 0) {
+                if (x == 0) {
                     myshoes.forEach(System.out::println);
                 }
-            });
-        System.out.printf("Done with %d iteration(s)\n", iters);
+                return myshoes.size();
+              }).sum();
+           
+        System.out.printf("Done found %d pairs after %d iteration(s)\n", found_num, iters);
     }
 }
