@@ -27,20 +27,17 @@ public class Main {
         }
     }
     
+    static String styles[] = {
+                "boot",
+                "sneaker",
+                "sandal",
+                "pump",
+                "highheel"};
+                
+    static int shoes_num = 200;
+    
     List<Shoe> process(int size) {
-        Shoe[] arrayOfShoes = {
-            new Shoe(10, "sneaker"),
-            new Shoe(13, "sandal"), 
-            new Shoe(10, "boot"), 
-            new Shoe(10, "boot2"), 
-            new Shoe(12, "boot"), 
-            new Shoe(10, "boot3"), 
-            new Shoe(11, "boot"), 
-            new Shoe(10, "boot4"), 
-            new Shoe(9, "boot"), 
-            new Shoe(10, "boot5")
-        };
-        return Stream.of(arrayOfShoes).filter(shoe -> shoe.size == size).collect(Collectors.toList());
+        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5]+shoe)).filter(shoe -> shoe.size == size).collect(Collectors.toList());
     }
     
     public static void main(String ...args) {
