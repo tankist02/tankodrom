@@ -27,33 +27,39 @@ public class Main {
         }
     }
     
-    static String styles[] = {
-                "boot",
-                "sneaker",
-                "sandal",
-                "pump",
-                "highheel"};
-                
+               
     static int shoes_num = 200;
+    static String styles[] = {
+        "boot",
+        "sneaker",
+        "sandal",
+        "pump",
+        "highheel"};
     
-    List<Shoe> process(int size) {
-        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5]+shoe)).filter(shoe -> shoe.size == size).collect(Collectors.toList());
+    List<Shoe> shoesFactory(int shoes_num) {
+        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5] + shoe)).collect(Collectors.toList());
+    }
+
+    List<Shoe> process(List<Shoe> shoes) {
+        // This needs to be fixed
+        return shoes.filter(shoe -> shoe.size == size).collect(Collectors.toList());
     }
     
     public static void main(String ...args) {
         Main main = new Main();
         int iters = 1000;
         long found_num = 0;
-        if (args.length > 0)
+        if (args.length > 0) {
             iters = Integer.valueOf(args[0]);
-            found_num = IntStream.range(0, iters)
-               .map(x -> {
-                List<Shoe> myshoes = main.process(10);
-                if (x == 0) {
-                    myshoes.forEach(System.out::println);
-                }
-                return myshoes.size();
-              }).sum();
+        }
+
+        found_num = IntStream.range(0, iters).map(x -> {
+            List<Shoe> myshoes = main.process(10);
+            if (x == 0) {
+                myshoes.forEach(System.out::println);
+            }
+            return myshoes.size();
+          }).sum();
            
         System.out.printf("Done found %d pairs after %d iteration(s)\n", found_num, iters);
     }
