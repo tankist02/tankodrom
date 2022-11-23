@@ -26,7 +26,6 @@ public class Main {
             this.style = style;
         }
     }
-    
                
     static int shoes_num = 200;
     static String styles[] = {
@@ -40,9 +39,9 @@ public class Main {
         return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5] + shoe)).collect(Collectors.toList());
     }
 
-    List<Shoe> process(List<Shoe> shoes) {
+    List<Shoe> process(List<Shoe> shoes, int size) {
         // This needs to be fixed
-        return shoes.filter(shoe -> shoe.size == size).collect(Collectors.toList());
+        return shoes.stream().filter(shoe -> shoe.size == size).collect(Collectors.toList());
     }
     
     public static void main(String ...args) {
@@ -54,7 +53,7 @@ public class Main {
         }
 
         found_num = IntStream.range(0, iters).map(x -> {
-            List<Shoe> myshoes = main.process(10);
+            List<Shoe> myshoes = main.process(main.shoesFactory(shoes_num), 10);
             if (x == 0) {
                 myshoes.forEach(System.out::println);
             }
