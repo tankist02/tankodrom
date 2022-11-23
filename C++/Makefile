@@ -9,7 +9,10 @@ endif
 ifeq ($(BUILD_TYPE),debug)
 	CXXFLAGS += -Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter -std=c++20 -O0 -g3
 else ifeq ($(BUILD_TYPE),release)
-	CXXFLAGS += -Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter -std=c++20 -O3
+	CXXFLAGS += -Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter -std=c++20 -O3 -g
+else ifeq ($(BUILD_TYPE),profile)
+	CXXFLAGS += -Wall -Wextra -Wpedantic -Werror -Wno-unused-parameter -std=c++20 -O3 -pg -g
+	LFLAGS += -pg
 else
 $(error: Invalid BUILD_TYPE: $(BUILD_TYPE))
 endif

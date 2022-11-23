@@ -40,7 +40,6 @@ public class Main {
     }
 
     List<Shoe> process(List<Shoe> shoes, int size) {
-        // This needs to be fixed
         return shoes.stream().filter(shoe -> shoe.size == size).collect(Collectors.toList());
     }
     

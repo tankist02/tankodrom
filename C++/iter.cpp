@@ -5,7 +5,6 @@
 #include <fmt/format.h>
 
 struct Shoe {
-    Shoe(int s, std::string const& st) : size(s), style(st) {}
     int size;
     std::string style;
     std::ostream& save(std::ostream& os) const {
@@ -33,9 +32,8 @@ Shoes shoesFactory(int num)
         };
         int size = i % 12;
         char const* style = styles[i % 5];
-        // very slow snprintf(buf, sizeof(buf), "%s%d", style, size);
-        // slow shoes.push_back(Shoe(size, style + fmt::format("{}", size)));
-        shoes.push_back(Shoe(size, style + std::to_string(i)));
+        //shoes.push_back(Shoe(size, style + std::to_string(i)));
+        shoes.push_back({size, style + std::to_string(i)});
     }
     return shoes;
 }
