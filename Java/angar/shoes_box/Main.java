@@ -1,6 +1,7 @@
 package angar.shoes_box;
 import java.util.stream.*;
 import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
 
 public class Main {
@@ -34,9 +35,13 @@ public class Main {
         "sandal",
         "pump",
         "highheel"};
+        
+    public static <T> Collector<T, ?, List<T>> toList(int size) {
+          return Collectors.toCollection(() -> new ArrayList<T>(size));
+    }
     
     List<Shoe> shoesFactory(int shoes_num) {
-        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5] + shoe)).collect(Collectors.toList());
+        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5] + shoe)).collect(toList(shoes_num / styles.length + styles.length));
     }
 
     List<Shoe> process(List<Shoe> shoes, int size) {
@@ -46,12 +51,11 @@ public class Main {
     public static void main(String ...args) {
         Main main = new Main();
         int iters = 1000;
-        long found_num = 0;
         if (args.length > 0) {
             iters = Integer.valueOf(args[0]);
         }
 
-        found_num = IntStream.range(0, iters).map(x -> {
+        long found_num = IntStream.range(0, iters).map(x -> {
             List<Shoe> myshoes = main.process(main.shoesFactory(shoes_num), 10);
             if (x == 0) {
                 myshoes.forEach(System.out::println);
