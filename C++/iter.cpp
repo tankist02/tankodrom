@@ -2,11 +2,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fmt/format.h>
 
 struct Shoe {
     int size;
     std::string style;
+    //slow Shoe(int s, std::string st) : size(s), style(std::move(st)) {}
     std::ostream& save(std::ostream& os) const {
         os << size << ", " << style << "\n";
         return os;
@@ -22,6 +22,7 @@ void shoes_in_size(Shoes& shoes, int size) {
 Shoes shoesFactory(int num)
 {
     Shoes shoes;
+    shoes.reserve(num);
     for (int i = 0; i < num; ++i) {
         static char const* const styles[] = {
             "boot",
@@ -32,7 +33,7 @@ Shoes shoesFactory(int num)
         };
         int size = i % 12;
         char const* style = styles[i % 5];
-        //shoes.push_back(Shoe(size, style + std::to_string(i)));
+        //slow shoes.push_back(Shoe(size, style + std::to_string(i)));
         shoes.push_back({size, style + std::to_string(i)});
     }
     return shoes;
