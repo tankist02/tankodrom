@@ -1,8 +1,9 @@
 use std::env;
 
 struct Shoe<'a>  {
-    size: u32,
+    size: u32, // can be u8
     style: &'a str,
+    // model_num: u16 // since it makes it more realistic
 }
 
 impl<'a> Shoe<'a>  {
