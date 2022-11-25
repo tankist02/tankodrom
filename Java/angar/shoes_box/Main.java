@@ -43,7 +43,8 @@ public class Main {
     }
     
     List<Shoe> shoesFactory(int shoes_num) {
-        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % sizes_range, styles[shoe % styles.length] + shoe)).collect(toList(shoes_num / sizes_range + 1));
+        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % sizes_range, styles[shoe % styles.length]/* + shoe*/)).collect(toList(shoes_num / sizes_range + 1));
+        //return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5]/* + shoe*/)).collect(toList(shoes_num / styles.length + styles.length));
     }
 
     List<Shoe> process(List<Shoe> shoes, int size) {

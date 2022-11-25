@@ -1,11 +1,11 @@
 use std::env;
 
-struct Shoe {
+struct Shoe<'a>  {
     size: u32,
-    style: String,
+    style: &'a str,
 }
 
-impl Shoe {
+impl<'a> Shoe<'a>  {
     fn print(&self) {
         println!("{}, {}", self.size, self.style);
     }
@@ -19,14 +19,14 @@ const STYLES:  [&str;5] = [
     "highheel",
 ];
 
-fn shoes_factory(num: usize) -> Vec<Shoe> {
-
+fn shoes_factory<'a>(num: u32) -> Vec<Shoe<'a>> {
+    //let mut shoes = Vec::with_capacity(num);
     let mut shoes = Vec::new();
-    let mut i: usize = 0;
+    let mut i: u32 = 0;
     while i < num {
         let s = i % 12;
-        let st = String::from(STYLES[i % 5]) + &i.to_string();
-        shoes.push(Shoe{size: s as u32, style: st});
+        let st = &STYLES[i as usize % 5]; // + &i.to_string();
+        shoes.push(Shoe{size: s, style: st});
         i += 1;
     }
     shoes

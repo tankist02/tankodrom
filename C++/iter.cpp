@@ -34,7 +34,7 @@ Shoes shoesFactory(int num)
         int size = i % 12;
         char const* style = styles[i % 5];
         //slow shoes.push_back(Shoe(size, style + std::to_string(i)));
-        shoes.push_back({size, style + std::to_string(i)});
+        shoes.push_back({size, style/* + std::to_string(i)*/});
     }
     return shoes;
 }
