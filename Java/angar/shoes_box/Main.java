@@ -29,19 +29,21 @@ public class Main {
     }
                
     static int shoes_num = 200;
-    static String styles[] = {
+    static final String styles[] = {
         "boot",
         "sneaker",
         "sandal",
         "pump",
         "highheel"};
         
+     static final int sizes_range = 12;
+        
     public static <T> Collector<T, ?, List<T>> toList(int size) {
           return Collectors.toCollection(() -> new ArrayList<T>(size));
     }
     
     List<Shoe> shoesFactory(int shoes_num) {
-        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % 12, styles[shoe % 5] + shoe)).collect(toList(shoes_num / styles.length + styles.length));
+        return IntStream.range(0, shoes_num).mapToObj(shoe -> new Shoe(shoe  % sizes_range, styles[shoe % styles.length] + shoe)).collect(toList(shoes_num / sizes_range + 1));
     }
 
     List<Shoe> process(List<Shoe> shoes, int size) {
@@ -63,6 +65,6 @@ public class Main {
             return myshoes.size();
           }).sum();
            
-        System.out.printf("Done found %d pairs after %d iteration(s)\n", found_num, iters);
+        System.out.printf("Done, found %d pairs after %d iteration(s)\n", found_num, iters);
     }
 }
