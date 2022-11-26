@@ -5,7 +5,8 @@
 
 struct Shoe {
     int size;
-    std::string style;
+    //std::string style;
+    char const* style;
     //slow Shoe(int s, std::string st) : size(s), style(std::move(st)) {}
     std::ostream& save(std::ostream& os) const {
         os << size << ", " << style << "\n";

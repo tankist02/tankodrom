@@ -1,9 +1,8 @@
 use std::env;
 
 struct Shoe<'a>  {
-    size: u32, // can be u8
+    size: u32,
     style: &'a str,
-    // model_num: u16 // since it makes it more realistic
 }
 
 impl<'a> Shoe<'a>  {
@@ -21,9 +20,9 @@ const STYLES:  [&str;5] = [
 ];
 
 fn shoes_factory<'a>(num: u32) -> Vec<Shoe<'a>> {
-    //let mut shoes = Vec::with_capacity(num);
-    let mut shoes = Vec::new();
-    let mut i: u32 = 0;
+    let mut shoes = Vec::with_capacity(num as usize);
+    //let mut shoes = Vec::new();
+    let mut i = 0;
     while i < num {
         let s = i % 12;
         let st = &STYLES[i as usize % 5]; // + &i.to_string();

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class Main {
-    
     class Shoe {
         int size;
-        String style;
+        final String style;
         Appendable save(Appendable os) throws IOException {
-            return os.append(""+size).append(", ").append(style);
+            return os.append("" + size).append(", ").append(style);
         }
         
         public String toString() {
@@ -36,7 +35,7 @@ public class Main {
         "pump",
         "highheel"};
         
-     static final int sizes_range = 12;
+    static final int sizes_range = 12;
         
     public static <T> Collector<T, ?, List<T>> toList(int size) {
           return Collectors.toCollection(() -> new ArrayList<T>(size));
