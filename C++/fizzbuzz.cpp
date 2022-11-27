@@ -1,5 +1,10 @@
+#include <cstring>
 #include <iostream>
+#include <variant>
 
+// slow using Value = std::variant<char const*, std::string>;
+
+//Value fizzbuzz(int i)
 std::string fizzbuzz(int i)
 {
     if (i % 15 == 0) return "FizzBuzz";
@@ -17,6 +22,8 @@ int main(int argc, char* argv[])
     {
         std::string res = fizzbuzz(i);
         sumlen += res.size();
+        //Value res = fizzbuzz(i);
+        //sumlen += (res.index() == 0 ? strlen(std::get<0>(res)) : std::get<1>(res).size());
     }
     std::cout << "loops: " << loops << ", sumlen: " << sumlen << std::endl;
 }
