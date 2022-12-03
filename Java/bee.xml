@@ -262,6 +262,16 @@
         <value variable="CUSTOM CP"/>
      </operator>
   </expression>
+  
+  
+  <target name="run2" dir="PROJECT_HOME">
+    <echo>Running...</echo>
+    <dependency target="jar"/>
+    <dependency value="true"/>
+    <task name="main" code="angar.gensets.Dispatcher" path="run class path">
+       <parameter variable="~#args#~"/>
+    </task>
+  </target>
 
   <target name="run" dir="PROJECT_HOME">
     <echo>Running...</echo>
