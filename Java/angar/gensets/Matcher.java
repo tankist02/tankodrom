@@ -41,19 +41,26 @@ public class Matcher {
 			return;
 		}
 		// Compare 5 of 6 numbers
-		for (int i = 0; i < Dispatcher.NUMBERS_IN_SET; i++) {
-			long bit = 1L << (Dispatcher.allsets[newindex][i] - 1);
-			long fivebits = allSetsAsBits[newindex][0] ^ bit;
-			if ((allSetsAsBits[oldindex][0] & fivebits) == fivebits)
-			{
-				// found match
-				Dispatcher.allmatches[newindex][1] += 1;
-				sameFive[currentSameFive][0] = oldindex;
-				sameFive[currentSameFive][1] = newindex;
-				currentSameFive++;
-				return;
-			}
+		long cmp = allSetsAsBits[oldindex][0] & allSetsAsBits[newindex][0];
+		int sameBits = bitCount(cmp);
+		if (sameBits == 5) {
+			// found match
+			Dispatcher.allmatches[newindex][1] += 1;
+			sameFive[currentSameFive][0] = oldindex;
+			sameFive[currentSameFive][1] = newindex;
+			currentSameFive++;
+			return;
 		}
+	}
+	
+	private static int bitCount(long i) {
+		i = i - ((i >>> 1) & 0x5555555555555555L);
+		i = (i & 0x3333333333333333L) + ((i >>> 2) & 0x3333333333333333L);
+		i = (i + (i >>> 4)) & 0x0f0f0f0f0f0f0f0fL;
+		i = i + (i >>> 8);
+		i = i + (i >>> 16);
+		i = i + (i >>> 32);
+		return (int) i & 0x7f;
 	}
 	
 	/**
