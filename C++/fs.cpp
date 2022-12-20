@@ -5,7 +5,7 @@ namespace fs = std::filesystem;
 
 int main(int argc, char** argv)
 {
-    /*fs::path p(argv[1] ? argv[1] : "test.text");
+    fs::path p(argv[1] ? argv[1] : "test.text");
     if (fs::exists(p))
     {
         std::cout << "path: " << p << " exists\n";
@@ -25,7 +25,7 @@ int main(int argc, char** argv)
         {
             std::cout << '\t' << e.path() << '\n';
         }
-    }*/
+    }
     
     switch (fs::path p{argv[1]}; status(p).type())
     {
