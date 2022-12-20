@@ -43,7 +43,7 @@ Shoes shoesFactory(int num)
 int main(int argc, char* argv[])
 {
     int loops = 1000;
-    if (argv[1]) {
+    if (argc > 1) {
         loops = std::stoi(argv[1]);
     }
     

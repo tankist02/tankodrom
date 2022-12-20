@@ -11,6 +11,11 @@ fn main() {
         println!("{:?}", v2);
     }
     println!("{:?}", v);
+
+    let res = less(4, 3);
+    println!("res: {}", res);
+    let res = less(2, 3);
+    println!("res: {}", res);
 }
 
 fn less(i: i64, j: i64) -> bool {

@@ -17,23 +17,7 @@ int main(int argc, char* argv[])
     std::string line;
 
     size_t tokens = 0;
-    //std::list<std::string> list;
     std::vector<std::string> list;
-
-    /*size_t lines = 0;
-    while (std::getline(ifs, line))
-    {
-        ++lines;
-        list.push_back(line);
-
-        for (char const* p = line.c_str(); p; p = strchr(p, ','))
-        {
-            ++p;
-            ++tokens;
-        }
-    }
-
-    std::cout << "lines: " << lines << ", tokens: " << tokens << std::endl;*/
 
     size_t lines = 0;
     while (std::getline(ifs, line))
@@ -45,10 +29,8 @@ int main(int argc, char* argv[])
 
     for (auto const& l : list)
     {
-        for (char const* p = l.c_str(); *p; ++p) //p = strchr(p, ','))
+        for (char const* p = l.c_str(); *p; ++p)
         {
-            //++p;
-            //++tokens;
             if (*p == ',')
             {
                 ++tokens;
