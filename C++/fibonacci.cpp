@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include <boost/multiprecision/cpp_int.hpp> 
 
 using namespace boost::multiprecision;
@@ -21,14 +20,7 @@ int main(int argc, char* argv[])
 {
     int num = 250000;
     if (argv[1]) { num = std::stoi(argv[1]); }
-    std::cout << "num: " << num << std::endl;
 
-    /*cpp_int bn = 1;
-    for (int i = 0; i < num; ++i)
-    {
-        bn += i;
-    }
-    std::cout << "bn: " << bn << std::endl;*/
     clock_t t = clock();
     cpp_int b = fib(num);
     std::cout << num << "th fib # is: " << b << std::endl;
