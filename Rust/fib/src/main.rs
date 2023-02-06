@@ -23,6 +23,8 @@ fn main() {
     let now = Instant::now();
     let f = fib(n);
     let elapsed = now.elapsed();
-    println!("{n}th fib # is: {f}");
+    //println!("{n}th fib # is: {f}");
+    println!("{n}");
+    println!("{f}");
     println!("Time to compute: {:?}", elapsed);
 }

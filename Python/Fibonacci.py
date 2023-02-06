@@ -1,4 +1,7 @@
+import sys
+
 def fib(number_of_terms):
+   sys.set_int_max_str_digits(1000000)
    counter = 0
    first = 0
    second = 1
@@ -14,5 +17,6 @@ def fib(number_of_terms):
    print(last)
 
 # Driver Code
-fib(1000000)
+#fib(1000000)
+fib(1000000 - 1)
 
