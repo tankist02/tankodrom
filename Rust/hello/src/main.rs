@@ -1,3 +1,20 @@
+fn foo(i: i32) -> i32 {
+    if i > 0 {
+        1
+    }
+    else {
+        -1
+    }
+}
+
+fn bar(i: i32) -> i32 {
+    let b = 1;
+    if i > 0 {
+        b
+    }
+    -1
+}
+
 fn main() {
     println!("Hello, world!");
 	let mut v : Vec<i32> = Vec::new();
@@ -16,6 +33,11 @@ fn main() {
     println!("res: {}", res);
     let res = less(2, 3);
     println!("res: {}", res);
+
+    let a = String::from("abc");
+    let b = String::from("xyz");
+    let c = a + &b;
+    println!("{c}");
 }
 
 fn less(i: i64, j: i64) -> bool {

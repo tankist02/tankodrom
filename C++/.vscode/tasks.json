@@ -23,6 +23,12 @@
 				"isDefault": true
 			},
 			"detail": "compiler: /usr/lib64/ccache/g++"
+		},
+		{
+			"type": "process",
+			"label": "build active file",
+			"command": "make",
+			"args": ["${fileBasenameNoExtension}"]
 		}
 	]
 }
