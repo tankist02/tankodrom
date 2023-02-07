@@ -9,9 +9,9 @@ cpp_int fib(int place)
     cpp_int b = 1;
     while (place-- > 1)
     {
-        cpp_int t = b;
-        b = a + b;
-        a = t;
+        cpp_int t {b + a};
+        std::swap(a, b);
+        std::swap(b, t);
     }
     return b;
 }
@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 
     clock_t t = clock();
     cpp_int b = fib(num);
-    std::cout << num << "th fib # is: " << b << std::endl;
+    std::cout << num << "\n" << b << std::endl;
     t = clock() - t;
     std::cout << "Time to compute: " << (double)t / CLOCKS_PER_SEC << " seconds" << std::endl;
 

@@ -1,4 +1,5 @@
 import sys
+import time
 
 def fib(number_of_terms):
    sys.set_int_max_str_digits(1000000)
@@ -17,6 +18,9 @@ def fib(number_of_terms):
    print(last)
 
 # Driver Code
+t = time.process_time();
 #fib(1000000)
 fib(1000000 - 1)
+t = time.process_time() - t
+print(t)
 
