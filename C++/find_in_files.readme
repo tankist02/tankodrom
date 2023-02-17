@@ -1,0 +1,10 @@
+time ./find_in_files test.csv line100000 Line100000 line99999 Line99999 line99998 Line99998 line99997 Line99997 line99996 Line99996 line99995 Line99995 line99994 Line99994 line99993 Line99993 line99992 Line99992 line99991 Line99991 line99990 Line99990 token_100000_1000 Token_100000_1000
+fname: test.csv
+Content length: 1579283895, time to load: 1.79711
+line token_100000_1000 
+Time to find: 1.94348
+
+real	0m3.826s
+user	0m2.393s
+sys	0m1.423s
+
