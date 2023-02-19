@@ -1,10 +1,13 @@
-time ./find_in_files test.csv line100000 Line100000 line99999 Line99999 line99998 Line99998 line99997 Line99997 line99996 Line99996 line99995 Line99995 line99994 Line99994 line99993 Line99993 line99992 Line99992 line99991 Line99991 line99990 Line99990 token_100000_1000 Token_100000_1000
-fname: test.csv
-Content length: 1579283895, time to load: 1.79711
-line token_100000_1000 
-Time to find: 1.94348
+./generate_csv 500000
 
-real	0m3.826s
-user	0m2.393s
-sys	0m1.423s
+andrew@clinton:C++$ time ./find_in_files test.csv line_500000 Line_500000 line_499999 Line_499999 line_499998 Line_499998 line_499997 Line_499997 line_499996 Line_499996 line_499995 Line_499995 line_499994 Line_499994 line_499993 Line_499993 line_499992 Line_499992 line_499991 Line_499991 line_499990 Line_499990 token_500000_1000 Token_500000_1000
+fname: test.csv
+Content length: 8341283895, time to load: 14.4933
+line line_499990 line_499991 line_499992 line_499993 line_499994 line_499995 line_499996 line_499997 line_499998 line_499999 line_500000 token_500000_1000
+Time to find: 14.8171
+
+real	0m45.192s
+user	0m17.587s
+sys	0m12.713s
+
 
