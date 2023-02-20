@@ -1,4 +1,6 @@
 #include <algorithm>
+#include <execution>
+#include <functional>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,6 +18,10 @@ void find(Strings const& sstf, std::string const& content, Strings& found)
     for (auto const& s : sstf)
     {
         if (content.find(s) != std::string::npos)
+        //if (std::search(content.begin(), content.end(), 
+          //  std::default_searcher{s.begin(), s.end()}) != content.end())
+            //std::boyer_moore_searcher{s.begin(), s.end()}) != content.end())
+        //if (std::search(std::execution::par, content.begin(), content.end(), s.begin(), s.end()) != content.end())
         {
             found.insert(s);
         }
@@ -47,13 +53,15 @@ int main(int argc, char* argv[])
     std::stringstream ss;
     ss << ifs.rdbuf();
     std::string content = ss.str();
+    auto size = content.size();
     s = clock() - s;
-    std::cout << "Content length: " << content.size() << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
+    std::cout << "Content length: " << size << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
 
     s = clock();
     Strings found;
     find(sstf, content, found);
     s = clock() - s;
+    std::cout << "Found: ";
     for (auto const& e : found) { std::cout << e << " "; }
     std::cout << "\nTime to find: " << double(s) / CLOCKS_PER_SEC << std::endl;
 

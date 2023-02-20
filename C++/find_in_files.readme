@@ -1,13 +1,45 @@
-./generate_csv 500000
+./generate_csv 400000
+ndrew@clinton:C++$ ll -h test.csv 
+-rw-r--r-- 1 andrew 6.2G Feb 19 20:53 test.csv
 
-andrew@clinton:C++$ time ./find_in_files test.csv line_500000 Line_500000 line_499999 Line_499999 line_499998 Line_499998 line_499997 Line_499997 line_499996 Line_499996 line_499995 Line_499995 line_499994 Line_499994 line_499993 Line_499993 line_499992 Line_499992 line_499991 Line_499991 line_499990 Line_499990 token_500000_1000 Token_500000_1000
+
+std::string::find:
+
+andrew@clinton:C++$ time ./find_in_files test.csv line_400000 Line_400000 line_399999 Line_399999 line_399998 Line_399998 line_399997 Line_399997 line_399996 Line_399996 line_399995 Line_399995 line_399994 Line_399994 line_399993 Line_399993 line_399992 Line_399992 line_399991 Line_399991 line_399990 Line_399990 token_400000_1000 Token_400000_1000
 fname: test.csv
-Content length: 8341283895, time to load: 14.4933
-line line_499990 line_499991 line_499992 line_499993 line_499994 line_499995 line_499996 line_499997 line_499998 line_499999 line_500000 token_500000_1000
-Time to find: 14.8171
+Content length: 6650783895, time to load: 8.49062
+Found: line line_399990 line_399991 line_399992 line_399993 line_399994 line_399995 line_399996 line_399997 line_399998 line_399999 line_400000 token_400000_1000
+Time to find: 8.04467
 
-real	0m45.192s
-user	0m17.587s
-sys	0m12.713s
+real	0m17.126s
+user	0m9.799s
+sys	0m7.295s
 
+
+std::search
+std::default_searcher:
+std::search parallel:
+
+andrew@clinton:C++$ time ./find_in_files test.csv line_400000 Line_400000 line_399999 Line_399999 line_399998 Line_399998 line_399997 Line_399997 line_399996 Line_399996 line_399995 Line_399995 line_399994 Line_399994 line_399993 Line_399993 line_399992 Line_399992 line_399991 Line_399991 line_399990 Line_399990 token_400000_1000 Token_400000_1000
+fname: test.csv
+Content length: 6650783895, time to load: 8.53173
+Found: line line_399990 line_399991 line_399992 line_399993 line_399994 line_399995 line_399996 line_399997 line_399998 line_399999 line_400000 token_400000_1000
+Time to find: 24.6835
+
+real	0m33.834s
+user	0m26.477s
+sys	0m7.304s
+
+
+std::boyer_moore:
+
+andrew@clinton:C++$ time ./find_in_files test.csv line_400000 Line_400000 line_399999 Line_399999 line_399998 Line_399998 line_399997 Line_399997 line_399996 Line_399996 line_399995 Line_399995 line_399994 Line_399994 line_399993 Line_399993 line_399992 Line_399992 line_399991 Line_399991 line_399990 Line_399990 token_400000_1000 Token_400000_1000
+fname: test.csv
+Content length: 6650783895, time to load: 8.9584
+Found: line line_399990 line_399991 line_399992 line_399993 line_399994 line_399995 line_399996 line_399997 line_399998 line_399999 line_400000 token_400000_1000
+Time to find: 52.2416
+
+real	1m9.559s
+user	0m54.094s
+sys	0m7.645s
 
