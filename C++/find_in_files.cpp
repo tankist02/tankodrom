@@ -4,12 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <set>
 #include <string>
 #include <cerrno>
 #include <cstring>
 
-using Strings = std::set<std::string>;
+using Strings = std::vector<std::string>;
 
 // Find strings in sstf as substrings in content
 // Put found strings into found
@@ -23,7 +22,7 @@ void find(Strings const& sstf, std::string const& content, Strings& found)
             //std::boyer_moore_searcher{s.begin(), s.end()}) != content.end())
         //if (std::search(std::execution::par, content.begin(), content.end(), s.begin(), s.end()) != content.end())
         {
-            found.insert(s);
+            found.push_back(s);
         }
     }
 }
@@ -36,23 +35,31 @@ int main(int argc, char* argv[])
     std::cout << "fname: " << fname << std::endl;
 
     // Default strings to find
-    Strings sstf {"line", "Line"};
+    Strings sstf;
     for (int i = 2; i < argc; ++i)
     {
-        sstf.insert(argv[i]);
+        sstf.push_back(argv[i]);
     }
 
     clock_t s = clock();
-    std::ifstream ifs(fname);
+    std::ifstream ifs(fname, ifs.binary);
     if (!ifs)
     {
         std::cerr << "Failed to open file: " << fname << " for reading, error: " << strerror(errno) << std::endl;
         return -1;
     }
     // Load input file into buffer
-    std::stringstream ss;
+    /*std::stringstream ss;
     ss << ifs.rdbuf();
-    std::string content = ss.str();
+    std::string content = ss.str();*/
+    //std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+    //std::string content;
+    //std::getline(ifs, content, '\0');
+    ifs.seekg(0, ifs.end);
+    std::string content(ifs.tellg(), 0);
+    ifs.seekg(0);
+    ifs.read(content.data(), content.size());
+
     auto size = content.size();
     s = clock() - s;
     std::cout << "Content length: " << size << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
