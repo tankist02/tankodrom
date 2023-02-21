@@ -11,6 +11,7 @@ fn load_file(n: &str) -> Result<String, io::Error>{
 
 fn find<'a>(ss: &'a[String], content: &str) -> Vec<&'a str>
 {
+    println!("Searching for {} substrings", ss.len());
     let mut found: Vec<&'a str> = Vec::new();
     for s in ss {
         if content.contains(s) {
@@ -47,6 +48,16 @@ fn main() {
 
     let now = Instant::now();
     let found = find(&stf, &content);
-    println!("Search time: {:?}", now.elapsed());
-    println!("Found: {:?}", found);
+    println!("Found {} substrings, search time: {:?}", found.len(), now.elapsed());
+    
+    /* Search gradually from 1 to all substrings
+    for i in 1..stf.len() {
+        let now = Instant::now();
+        let found = find(&stf[0..i], &content);
+        let elapsed = now.elapsed().as_millis();
+        let per: f32 = elapsed as f32 / i as f32;
+        println!("Found {} substrings, search time: {:?}, per substring: {:?}ms\n", 
+            found.len(), elapsed, per);
+        //println!("Found: {:?}\n", found);
+    }*/
 }

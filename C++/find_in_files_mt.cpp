@@ -1,16 +1,16 @@
 #include <algorithm>
 #include <execution>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <mutex>
 #include <thread>
 #include <sstream>
-#include <set>
 #include <string>
+#include <vector>
 #include <cerrno>
 #include <cstring>
 
-using Strings = std::set<std::string>;
+using Strings = std::vector<std::string>;
 using Threads = std::vector<std::thread>;
 std::mutex my_mutex;
 
@@ -19,8 +19,8 @@ void findString(std::string const& stf, std::string const& content, Strings& fou
 {
     if (content.find(stf) != std::string::npos)
     {
-        //std::lock_guard<std::mutex> lock(my_mutex);
-        found.insert(stf);
+        std::lock_guard<std::mutex> lock(my_mutex);
+        found.push_back(stf);
     }
 }
 
@@ -28,16 +28,16 @@ void findString(std::string const& stf, std::string const& content, Strings& fou
 // Put found strings into found
 void find(Strings const& sstf, std::string const& content, Strings& found)
 {
-    //Threads ts;
+    Threads ts;
     for (auto const& s : sstf)
     {
-        //ts.push_back(std::thread(findString, std::ref(s), std::ref(content), std::ref(found)));
+        ts.push_back(std::thread(findString, std::ref(s), std::ref(content), std::ref(found)));
         if (content.find(s) != std::string::npos)
         {
-            found.insert(s);
+            found.push_back(s);
         }
     }
-    //std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
+    std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
 }
 
 // Takes optional input file name and strings to find
@@ -48,14 +48,10 @@ int main(int argc, char* argv[])
     std::cout << "fname: " << fname << std::endl;
 
     // Default strings to find
-    Strings sstf {"line", "Line"};
+    Strings sstf;
     for (int i = 2; i < argc; ++i)
     {
-        sstf.insert(argv[i]);
-        // Create strings that won't be found
-        std::string temp(argv[i]);
-        if (!temp.empty()) { temp[0] = std::toupper(temp[0]); }
-        sstf.insert(temp);
+        sstf.push_back(argv[i]);
     }
 
     clock_t s = clock();
@@ -65,10 +61,12 @@ int main(int argc, char* argv[])
         std::cerr << "Failed to open file: " << fname << " for reading, error: " << strerror(errno) << std::endl;
         return -1;
     }
+
     // Load input file into buffer
-    std::stringstream ss;
-    ss << ifs.rdbuf();
-    std::string content = ss.str();
+    ifs.seekg(0, ifs.end);
+    std::string content(ifs.tellg(), 0);
+    ifs.seekg(0);
+    ifs.read(content.data(), content.size());
     s = clock() - s;
     std::cout << "Content length: " << content.size() << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
 
