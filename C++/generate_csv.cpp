@@ -30,10 +30,10 @@ int main(int argc, char* argv[])
 
     for (size_t l = 0; l < lines; ++l)
     {
-        ofs << "line" << (l + 1);
+        ofs << "line_" << (l + 1);
         for (size_t t = 0; t < tokens; ++t)
         {
-            ofs << ",token" << (t + 1);
+            ofs << ",token_" << (l + 1) << "_" << (t + 1);
         }
         ofs << "\n";
     }

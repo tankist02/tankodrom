@@ -1,19 +1,3 @@
-//use std::fs::File;
-//use std::io::BufRead;
-//
-//fn main() {
-//    let file = File::open("test.csv");
-//    let reader = std::io::BufReader::new(file);
-//
-//    let mut vec = Vec::new();
-//
-//    for line in reader.lines() {
-//        vec.push(line);
-//    }
-//
-//    println!("vec len: {}", vec.len());
-//}
-
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;

@@ -7,15 +7,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'fizzbuzz'",
+            "name": "Debug executable 'sentinel'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=fizzbuzz",
-                    "--package=fizzbuzz"
+                    "--bin=sentinel",
+                    "--package=sentinel"
                 ],
                 "filter": {
-                    "name": "fizzbuzz",
+                    "name": "sentinel",
                     "kind": "bin"
                 }
             },
@@ -25,16 +25,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'fizzbuzz'",
+            "name": "Debug unit tests in executable 'sentinel'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=fizzbuzz",
-                    "--package=fizzbuzz"
+                    "--bin=sentinel",
+                    "--package=sentinel"
                 ],
                 "filter": {
-                    "name": "fizzbuzz",
+                    "name": "sentinel",
                     "kind": "bin"
                 }
             },

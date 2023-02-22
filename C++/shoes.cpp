@@ -5,7 +5,6 @@
 
 struct Shoe {
     int size;
-    //std::string style;
     char const* style;
     //slow Shoe(int s, std::string st) : size(s), style(std::move(st)) {}
     std::ostream& save(std::ostream& os) const {
@@ -35,7 +34,7 @@ Shoes shoesFactory(int num)
         int size = i % 12;
         char const* style = styles[i % 5];
         //slow shoes.push_back(Shoe(size, style + std::to_string(i)));
-        shoes.push_back({size, style/* + std::to_string(i)*/});
+        shoes.push_back({size, style + std::to_string(i)});
     }
     return shoes;
 }
@@ -54,7 +53,6 @@ int main(int argc, char* argv[])
         shoes_in_size(shoes, 10);
         if (l == 0) {
             for (auto const& shoe : shoes) {
-                //std::cout << shoe.size << ", " << shoe.style << "\n";
                 shoe.save(std::cout);
             }
         }

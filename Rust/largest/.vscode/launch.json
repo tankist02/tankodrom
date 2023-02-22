@@ -7,15 +7,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'fizzbuzz'",
+            "name": "Debug executable 'largest'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=fizzbuzz",
-                    "--package=fizzbuzz"
+                    "--bin=largest",
+                    "--package=largest"
                 ],
                 "filter": {
-                    "name": "fizzbuzz",
+                    "name": "largest",
                     "kind": "bin"
                 }
             },
@@ -25,16 +25,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'fizzbuzz'",
+            "name": "Debug unit tests in executable 'largest'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=fizzbuzz",
-                    "--package=fizzbuzz"
+                    "--bin=largest",
+                    "--package=largest"
                 ],
                 "filter": {
-                    "name": "fizzbuzz",
+                    "name": "largest",
                     "kind": "bin"
                 }
             },

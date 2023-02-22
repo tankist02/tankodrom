@@ -16,5 +16,11 @@ int main()
     auto a = func(0);
     std::copy(a.begin(), a.end(), std::ostream_iterator<int>(std::cout, ","));
     std::cout << std::endl;
+
+    std::uint8_t x = 0;
+    std::uint8_t y = 1;
+    auto z = x & y;
+    std::cout << sizeof(x) << std::endl;
+    std::cout << z << " " << sizeof(z) << std::endl;
 }
 
