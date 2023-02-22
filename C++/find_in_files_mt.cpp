@@ -14,13 +14,34 @@ using Strings = std::vector<std::string>;
 using Threads = std::vector<std::thread>;
 std::mutex my_mutex;
 
-// Find string in content
-void findString(std::string const& stf, std::string const& content, Strings& found)
+void loadStrings(std::string const& fname, Strings& toFind)
 {
-    if (content.find(stf) != std::string::npos)
+    std::ifstream ifs(fname);
+    if (!ifs)
     {
-        std::lock_guard<std::mutex> lock(my_mutex);
-        found.push_back(stf);
+        std::cerr << "Failed to open file: " << fname << " for reading, error: " << strerror(errno) << std::endl;
+        exit(-1);
+    }
+    std::string line;
+    while (std::getline(ifs, line))
+    {
+        toFind.push_back(line);
+    }
+    std::cout << "Number of strings to find: " << toFind.size() << std::endl;
+}
+
+// Find string in content
+void findStrings(Strings const& sstf, std::string const& content, Strings& found)
+{
+    //std::cout << "thread id: " << std::this_thread::get_id() << ", sstf size: " << sstf.size() << std::endl;
+    for (auto const& e : sstf)
+    {
+        if (content.find(e) != std::string::npos)
+        {
+            std::lock_guard<std::mutex> lock(my_mutex);
+            found.push_back(e);
+            //std::cout  << "thread id: " << std::this_thread::get_id() << ", found: " << e << '\n';
+        }
     }
 }
 
@@ -28,31 +49,32 @@ void findString(std::string const& stf, std::string const& content, Strings& fou
 // Put found strings into found
 void find(Strings const& sstf, std::string const& content, Strings& found)
 {
-    Threads ts;
-    for (auto const& s : sstf)
-    {
-        ts.push_back(std::thread(findString, std::ref(s), std::ref(content), std::ref(found)));
-        if (content.find(s) != std::string::npos)
-        {
-            found.push_back(s);
-        }
-    }
-    std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
+    //Threads ts;
+    //ts.push_back(std::thread(findStrings, std::ref(sstf1), std::ref(content), std::ref(found)));
+    //ts.push_back(std::thread(findStrings, std::ref(sstf2), std::ref(content), std::ref(found)));
+    //std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
+    auto middle = sstf.begin() + sstf.size() / 2;
+    Strings sstf1(sstf.begin(), middle);
+    Strings sstf2(middle, sstf.end());
+    std::thread t1(findStrings, std::ref(sstf1), std::ref(content), std::ref(found));
+    std::thread t2(findStrings, std::ref(sstf2), std::ref(content), std::ref(found));
+    t1.join();
+    t2.join();
 }
 
 // Takes optional input file name and strings to find
 int main(int argc, char* argv[])
 {
-    std::string fname = "test.text";
-    if (argv[1]) { fname = argv[1]; }
-    std::cout << "fname: " << fname << std::endl;
-
-    // Default strings to find
-    Strings sstf;
-    for (int i = 2; i < argc; ++i)
-    {
-        sstf.push_back(argv[i]);
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <file_to_search> <strings_to_find>\n";
+        exit(-1);
     }
+    std::string fname = argv[1];
+    std::string to_find = argv[2];
+    std::cout << "File to search: " << fname << ", strings to find: " << to_find << std::endl;
+
+    Strings sstf;
+    loadStrings(to_find, sstf);
 
     clock_t s = clock();
     std::ifstream ifs(fname);
@@ -80,8 +102,7 @@ int main(int argc, char* argv[])
         sstf.end(), 
         [&](auto const& s) {if (content.find(s) != std::string::npos) { found.insert(s); }});*/
     s = clock() - s;
-    for (auto const& e : found) { std::cout << e << " "; }
-    std::cout << "\nTime to find: " << double(s) / CLOCKS_PER_SEC << std::endl;
+    std::cout << "Number of found strings: " << found.size() << ", time to find: " << double(s) / CLOCKS_PER_SEC << std::endl;
 
     return 0;
 }

@@ -3,6 +3,11 @@ use std::io;
 use std::io::Read;
 use std::fs::File;
 
+fn load_strings(fname: &str) -> Vec<String> {
+    let mut res: Vec<String> = Vec::new();
+    res
+}
+
 fn load_file(n: &str) -> Result<String, io::Error>{
     let mut s = String::new();
     File::open(n)?.read_to_string(&mut s)?;

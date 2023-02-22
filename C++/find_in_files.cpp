@@ -54,7 +54,6 @@ int main(int argc, char* argv[])
     std::string to_find = argv[2];
     std::cout << "File to search: " << fname << ", strings to find: " << to_find << std::endl;
 
-    // Default strings to find
     Strings sstf;
     loadStrings(to_find, sstf);
 
@@ -65,15 +64,14 @@ int main(int argc, char* argv[])
         std::cerr << "Failed to open file: " << fname << " for reading, error: " << strerror(errno) << std::endl;
         return -1;
     }
+
     // Load input file into buffer
     ifs.seekg(0, ifs.end);
     std::string content(ifs.tellg(), 0);
     ifs.seekg(0);
     ifs.read(content.data(), content.size());
-
-    auto size = content.size();
     s = clock() - s;
-    std::cout << "File to search size: " << size << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
+    std::cout << "File to search size: " << content.size() << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
 
     s = clock();
     Strings found;
