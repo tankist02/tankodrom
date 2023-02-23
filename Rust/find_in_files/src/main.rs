@@ -1,11 +1,22 @@
 use std::env;
 use std::io;
+use std::io::BufRead;
 use std::io::Read;
 use std::fs::File;
+use std::path::Path;
+use boyer_moore_magiclen::BMByte;
 
-fn load_strings(fname: &str) -> Vec<String> {
-    let mut res: Vec<String> = Vec::new();
-    res
+fn load_lines<P: AsRef<Path>>(fname: P) -> Vec<String> {
+	let mut vec = Vec::new();
+    if let Ok(file) = File::open(fname) {
+        let lines = io::BufReader::new(file).lines();
+        for l in lines {
+            if let Ok(line) = l {
+                vec.push(line);
+            }
+        }
+    }
+    vec
 }
 
 fn load_file(n: &str) -> Result<String, io::Error>{
@@ -29,23 +40,23 @@ fn find<'a>(ss: &'a[String], content: &str) -> Vec<&'a str>
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let def: String = "test.csv".to_string();
-    let n = if args.len() > 1 { &args[1] } else { &def };
-    println!("Loading file: {}...", n);
+    let bmb = BMByte::from("oocoo").unwrap();
+    assert_ne!(0, bmb.find_in("coocoocoocoo", 1).len());
+    assert_eq!(0, bmb.find_in("dummy", 1).len());
+    return;
 
-    let mut stf: Vec<String> = Vec::new();
-    for arg in env::args().skip(2) {
-        stf.push(arg.clone());
-    }
+    let fname = &args[1];
+    let to_find = &args[2];
+    println!("File to search: {}, strings to find: {}", fname, to_find);
 
-    println!("Strings to search: {:?}", stf);
-
+    let stf = load_lines(to_find);
+    
     use std::time::Instant;
     let now = Instant::now();
-    let content = match load_file(n) {
+    let content = match load_file(fname) {
         Ok(s) => s,
         Err(error) => {
-            println!("Failed to load file: {}, error: {}", n, error);
+            println!("Failed to load file: {}, error: {}", fname, error);
             return
         },
     };

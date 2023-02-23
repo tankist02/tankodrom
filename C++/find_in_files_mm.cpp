@@ -7,6 +7,9 @@
 #include <string>
 #include <cerrno>
 #include <cstring>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 
 using Strings = std::vector<std::string>;
 
@@ -26,24 +29,30 @@ void loadStrings(std::string const& fname, Strings& toFind)
     std::cout << "Number of strings to find: " << toFind.size() << std::endl;
 }
 
-int loadFile(std::string const& fname, std::string& content)
+char* loadFile(char const* fname, size_t& size)
 {
-    clock_t s = clock();
-    std::ifstream ifs(fname, ifs.binary);
-    if (!ifs)
+    int fd = open(fname, O_RDONLY);
+    if (fd < 0)
     {
-        std::cerr << "Failed to open file: " << fname << " for reading, error: " << strerror(errno) << std::endl;
-        return -1;
+        std::cerr << "Failed to open file: " << fname << ", error: " << strerror(errno) << std::endl;
+        return nullptr;
     }
-
-    // Load input file into buffer
-    ifs.seekg(0, ifs.end);
-    content.resize(ifs.tellg(), 0);
-    ifs.seekg(0);
-    ifs.read(content.data(), content.size());
-    s = clock() - s;
-    std::cout << "File to search size: " << content.size() << ", time to load: " << double(s) / CLOCKS_PER_SEC << std::endl;
-    return 0;
+    struct stat st;
+    if (fstat(fd, &st) < 0)
+    {
+        std::cerr << "Failed to stat file: " << fname << ", error: " << strerror(errno) << std::endl;
+        return nullptr;
+    }
+    char* buf = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
+    if (buf == MAP_FAILED)
+    {
+        std::cerr << "mmap failed, error: " << strerror(errno) << std::endl;
+        close(fd);
+        return nullptr;
+    }
+    close(fd);
+    size = st.st_size;
+    return buf;
 }
 
 // Find strings in sstf as substrings in content
@@ -88,13 +97,16 @@ int main(int argc, char* argv[])
     Strings sstf;
     loadStrings(to_find, sstf);
 
-    std::string content;
-    if (loadFile(fname, content) != 0) { return -1; }
+    size_t size;
+    char* content = loadFile(fname.c_str(), size);
+    if (content == nullptr) { return -1; }
+    std::cout << "File to search size: " << size << std::endl;
 
     clock_t s = clock();
     Strings found;
-    find(sstf, content, found);
-    //findC(sstf, content.c_str(), found);
+    find(sstf, std::string_view(content, size), found);
+    //findC(sstf, content, found);
+    munmap(content, size);
     s = clock() - s;
     std::cout << "Number of found strings: " << found.size() << ", time to find: " << double(s) / CLOCKS_PER_SEC << std::endl;
 
