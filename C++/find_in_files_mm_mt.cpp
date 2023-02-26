@@ -116,7 +116,7 @@ void find(Strings const& sstf, std::string_view const& content, int threads, Str
     t1.join();
     t2.join();*/
 
-    auto size = std::max(sstf.size() / threads, size_t(1));
+    auto size = std::max(sstf.size() / threads, 1lu);
     Threads ts;
     for (auto beg = sstf.begin(); beg < sstf.end(); beg += size)
     {
