@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <mutex>
+#include <thread>
 #include <cerrno>
 #include <cstring>
 #include <fcntl.h>
@@ -12,6 +14,8 @@
 #include <sys/stat.h>
 
 using Strings = std::vector<std::string>;
+using Threads = std::vector<std::thread>;
+std::mutex my_mutex;
 
 void loadStrings(std::string const& fname, Strings& toFind)
 {
@@ -57,7 +61,7 @@ char* loadFile(char const* fname, size_t& size)
 
 // Find strings in sstf as substrings in content
 // Put found strings into found
-void find(Strings const& sstf, std::string_view const& content, Strings& found)
+void findStrings(Strings const& sstf, std::string_view const& content, Strings& found)
 {
     for (auto const& s : sstf)
     {
@@ -67,9 +71,27 @@ void find(Strings const& sstf, std::string_view const& content, Strings& found)
             //std::boyer_moore_searcher{s.begin(), s.end()}) != content.end())
         //if (std::search(std::execution::par, content.begin(), content.end(), s.begin(), s.end()) != content.end())
         {
+            std::lock_guard<std::mutex> lock(my_mutex);
             found.push_back(s);
         }
     }
+}
+
+// Find strings in sstf as substrings in content
+// Put found strings into found
+void find(Strings const& sstf, std::string_view const& content, Strings& found)
+{
+    //Threads ts;
+    //ts.push_back(std::thread(findStrings, std::ref(sstf1), std::ref(content), std::ref(found)));
+    //ts.push_back(std::thread(findStrings, std::ref(sstf2), std::ref(content), std::ref(found)));
+    //std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
+    auto middle = sstf.begin() + sstf.size() / 2;
+    Strings sstf1(sstf.begin(), middle);
+    Strings sstf2(middle, sstf.end());
+    std::thread t1(findStrings, std::ref(sstf1), std::ref(content), std::ref(found));
+    std::thread t2(findStrings, std::ref(sstf2), std::ref(content), std::ref(found));
+    t1.join();
+    t2.join();
 }
 
 void findC(Strings const& sstf, char const* content, Strings& found)
