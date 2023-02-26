@@ -102,7 +102,6 @@ int main(int argc, char* argv[])
     if (content == nullptr) { return -1; }
     std::cout << "File to search size: " << size << std::endl;
 
-    clock_t s = clock();
     Strings found;
     find(sstf, std::string_view(content, size), found);
     //findC(sstf, content, found);
@@ -110,8 +109,7 @@ int main(int argc, char* argv[])
     {
         std::cerr << "Failed to munmap, error: " << strerror(errno) << std::endl;
     }
-    s = clock() - s;
-    std::cout << "Number of found strings: " << found.size() << ", time to find: " << double(s) / CLOCKS_PER_SEC << std::endl;
+    std::cout << "Number of found strings: " << found.size() << std::endl;
 
     return 0;
 }
