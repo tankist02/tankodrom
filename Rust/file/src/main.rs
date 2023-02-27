@@ -3,7 +3,7 @@ use std::io;
 use std::io::Read;
 use std::fs::File;
 
-fn load_file(n: &str) -> Result<String, io::Error>{
+fn load_file(n: &str) -> Result<String, io::Error> {
     let mut s = String::new();
     File::open(n)?.read_to_string(&mut s)?;
     Ok(s)
