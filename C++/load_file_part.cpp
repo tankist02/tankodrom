@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    std::cout << "fname: " << fname << ", bufSize: " << bufSize << ", patterns: " << toFind.size() << std::endl;
+    std::cout << "fname: " << fname << ", bufSize: " << bufSize << ", patterns: " << toFind.size() << ", psize: " << psize << std::endl;
 
     int fd = open(fname.c_str(), O_RDONLY);
     if (fd < 0)
@@ -82,24 +82,40 @@ int main(int argc, char* argv[])
     struct stat st;
     fstat(fd, &st);
 
-    size_t patSize = psize - 1;
+    size_t patSize = psize - 1; // Overlap size to ensure to find patterns that straddle buf boundary
     std::string buffer(bufSize, 0);
     ssize_t rd, total = 0;
-    while ((rd = read(fd, buffer.data(), bufSize)) > 0)
+    /*while ((rd = read(fd, buffer.data(), bufSize)) > 0)
     {
         //std::cout << "rd: " << rd << std::endl;
         buffer.resize(rd);
-        //std::cout << "buffer:\n" << buffer << std::endl;
+        std::cout << "rd: " << rd << ", buffer: " << buffer << std::endl;
         searchAll(buffer, toFind);
 
         // Calculate total read size to know when to stop reading
         total += rd;
         if (total >= st.st_size) { break; }
 
-        // Rewind back to include potential pattern that straddles buf reads
+        // Rewind back a bit to include potential pattern that straddles buf reads boundary
         lseek(fd, -patSize, SEEK_CUR);
         total -= patSize;
+    }*/
+
+    size_t offset = 0;
+    while ((rd = read(fd, buffer.data() + offset, bufSize - offset)) > 0)
+    {
+        buffer.resize(rd + offset);
+        //std::cout << "rd: " << rd << ", offset: " << offset << ", buf: " << buffer << std::endl;
+        searchAll(buffer, toFind);
+
+        // Move buffer boundary
+        memcpy(buffer.data(), buffer.data() + rd - patSize + offset, patSize);
+        //std::cout << "buf: " << buffer << std::endl;
+        offset = patSize;
+        total += rd;
     }
+    std::cout << "total: " << total << std::endl;
+
     close(fd);
     for (auto const& e : toFind) { std::cout << e.first << ": " << e.second << std::endl; }
 }
