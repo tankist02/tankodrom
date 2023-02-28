@@ -85,7 +85,8 @@ int main(int argc, char* argv[])
     size_t patSize = psize - 1; // Overlap size to ensure to find patterns that straddle buf boundary
     std::string buffer(bufSize, 0);
     ssize_t rd, total = 0;
-    /*while ((rd = read(fd, buffer.data(), bufSize)) > 0)
+    /* Rewind file back a little to handle pattern potentially straddling buffer border
+    while ((rd = read(fd, buffer.data(), bufSize)) > 0)
     {
         //std::cout << "rd: " << rd << std::endl;
         buffer.resize(rd);
@@ -101,6 +102,7 @@ int main(int argc, char* argv[])
         total -= patSize;
     }*/
 
+    // Copy buffer a bit to handle pattern potentially straddling buffer border
     size_t offset = 0;
     while ((rd = read(fd, buffer.data() + offset, bufSize - offset)) > 0)
     {
