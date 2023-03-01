@@ -61,15 +61,24 @@ int index(const char* text, const char* pattern) {
 size_t search(std::string const& buf, std::string const& pat)
 {
     size_t found = 0;
-    // Regular standard search
+    // C standard search
+    /* About 2 times slower than std::string::find
     char const* pos = buf.c_str();
     while ((pos = strstr(pos, pat.c_str())) != nullptr)
     {
         ++found;
         ++pos;
     }
+    */
+    // C++ standard search - the fastest for not very long patterns
+    size_t pos = 0;
+    while ((pos = buf.find(pat, pos)) != std::string::npos)
+    {
+        ++found;
+        ++pos;
+    }
     // ShiftOr search found and implemented by Kolya
-    /*
+    /* Very slow
     int ind;
     char const* p = buf.c_str();
     while ((ind = index(p, pat.c_str())) != -1)
