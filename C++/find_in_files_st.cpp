@@ -13,7 +13,7 @@
 
 using Strings = std::vector<std::string>;
 using StrSpan = std::span<std::string const>;
-using Threads = std::vector<std::thread>;
+using Threads = std::vector<std::jthread>;
 std::mutex my_mutex;
 
 void loadStrings(std::string const& fname, Strings& toFind)
@@ -101,7 +101,7 @@ void find(Strings const& sstf, std::string_view const& content, int threads, Str
     for (auto beg = sstf.begin(); beg < sstf.end(); beg += size)
     {
         StrSpan sp{beg, size};
-        ts.push_back(std::thread(findStringsSpan, sp, std::cref(content), std::ref(found)));
+        ts.push_back(std::jthread(findStringsSpan, sp, std::cref(content), std::ref(found)));
     }
     for (auto& t : ts) { t.join(); }
 }

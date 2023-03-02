@@ -11,7 +11,7 @@
 #include <cstring>
 
 using Strings = std::vector<std::string>;
-using Threads = std::vector<std::thread>;
+using Threads = std::vector<std::jthread>;
 std::mutex my_mutex;
 
 void loadStrings(std::string const& fname, Strings& toFind)
@@ -50,14 +50,14 @@ void findStrings(Strings const& sstf, std::string const& content, Strings& found
 void find(Strings const& sstf, std::string const& content, Strings& found)
 {
     //Threads ts;
-    //ts.push_back(std::thread(findStrings, std::ref(sstf1), std::ref(content), std::ref(found)));
-    //ts.push_back(std::thread(findStrings, std::ref(sstf2), std::ref(content), std::ref(found)));
+    //ts.push_back(std::jthread(findStrings, std::ref(sstf1), std::ref(content), std::ref(found)));
+    //ts.push_back(std::jthread(findStrings, std::ref(sstf2), std::ref(content), std::ref(found)));
     //std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
     auto middle = sstf.begin() + sstf.size() / 2;
     Strings sstf1(sstf.begin(), middle);
     Strings sstf2(middle, sstf.end());
-    std::thread t1(findStrings, std::ref(sstf1), std::ref(content), std::ref(found));
-    std::thread t2(findStrings, std::ref(sstf2), std::ref(content), std::ref(found));
+    std::jthread t1(findStrings, std::ref(sstf1), std::ref(content), std::ref(found));
+    std::jthread t2(findStrings, std::ref(sstf2), std::ref(content), std::ref(found));
     t1.join();
     t2.join();
 }

@@ -20,22 +20,16 @@ void update_data(widget_data& wd)
 
 int main(int argc, char* argv[])
 {
-    std::cout << "std::thread::hardware_concurrency: " << std::thread::hardware_concurrency() << std::endl;
+    std::cout << "std::jthread::hardware_concurrency: " << std::jthread::hardware_concurrency() << std::endl;
 
-    std::vector<std::thread> v;
+    std::vector<std::jthread> v;
 
-    for (int i = 0; i < 10; ++i)
-    {
-        v.push_back(std::thread(hello, i));
-    }
-    /*for (auto& it : v)
-    {
-        it.join();
-    }*/
-    std::for_each(v.begin(), v.end(), [](auto& o) { o.join(); });
+    for (int i = 0; i < 10; ++i) { v.push_back(std::jthread(hello, i)); }
+    for (auto& it : v) { it.join(); }
+    //std::for_each(v.begin(), v.end(), [](auto& o) { o.join(); });
 
     widget_data wd;
-    std::thread t(update_data, std::ref(wd)); // Need std::ref when expecting ref
+    std::jthread t(update_data, std::ref(wd)); // Need std::ref when expecting ref
     t.join();
 
     std::cout << "wd.d_: " << wd.d_ << std::endl;

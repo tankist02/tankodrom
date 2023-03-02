@@ -6,7 +6,7 @@
 
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
-using Threads = std::vector<std::thread>;
+using Threads = std::vector<std::jthread>;
 
 template<typename T>
 void print(T const& c)
@@ -30,7 +30,7 @@ void split(std::vector<T> const& v, int parts)
     for (auto beg = v.begin(); beg < v.end(); beg += size)
     {
         std::span sp{beg, size};
-        threads.push_back(std::thread(printSpan, sp));
+        threads.push_back(std::jthread(printSpan, sp));
         //printSpan(sp);
     }
     for (auto& e : threads) { e.join(); }

@@ -16,7 +16,7 @@
 
 using Strings = std::vector<std::string>;
 using StrSpan = std::span<std::string const>;
-using Threads = std::vector<std::thread>;
+using Threads = std::vector<std::jthread>;
 std::mutex my_mutex;
 
 void loadStrings(std::string const& fname, Strings& toFind)
@@ -100,19 +100,19 @@ void findStringsSpan(StrSpan sstf, std::string_view const& content, Strings& fou
 void find(Strings const& sstf, std::string_view const& content, int threads, Strings& found)
 {
     //Threads ts;
-    //ts.push_back(std::thread(findStrings, std::ref(sstf1), std::ref(content), std::ref(found)));
-    //ts.push_back(std::thread(findStrings, std::ref(sstf2), std::ref(content), std::ref(found)));
+    //ts.push_back(std::jthread(findStrings, std::ref(sstf1), std::ref(content), std::ref(found)));
+    //ts.push_back(std::jthread(findStrings, std::ref(sstf2), std::ref(content), std::ref(found)));
     //std::for_each(ts.begin(), ts.end(), [](auto& t) { t.join(); });
     //auto middle = sstf.begin() + sstf.size() / 2;
     //Strings sstf1(sstf.begin(), middle);
     //Strings sstf2(middle, sstf.end());
-    //std::thread t1(findStrings, std::cref(sstf1), std::cref(content), std::ref(found));
-    //std::thread t2(findStrings, std::cref(sstf2), std::cref(content), std::ref(found));
+    //std::jthread t1(findStrings, std::cref(sstf1), std::cref(content), std::ref(found));
+    //std::jthread t2(findStrings, std::cref(sstf2), std::cref(content), std::ref(found));
     /*auto size = sstf.size() / 2;
     StrSpan ss1{sstf.begin(), size};
     StrSpan ss2{sstf.begin() + size, size};
-    std::thread t1(findStringsSpan, ss1, std::cref(content), std::ref(found));
-    std::thread t2(findStringsSpan, ss2, std::cref(content), std::ref(found));
+    std::jthread t1(findStringsSpan, ss1, std::cref(content), std::ref(found));
+    std::jthread t2(findStringsSpan, ss2, std::cref(content), std::ref(found));
     t1.join();
     t2.join();*/
 
@@ -121,7 +121,7 @@ void find(Strings const& sstf, std::string_view const& content, int threads, Str
     for (auto beg = sstf.begin(); beg < sstf.end(); beg += size)
     {
         StrSpan sp{beg, size};
-        ts.push_back(std::thread(findStringsSpan, sp, std::cref(content), std::ref(found)));
+        ts.push_back(std::jthread(findStringsSpan, sp, std::cref(content), std::ref(found)));
     }
     for (auto& t : ts) { t.join(); }
 }
