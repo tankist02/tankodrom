@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
         total -= patSize;
     }*/
 
-    // Copy buffer a bit to handle pattern potentially straddling buffer border
+    // Copy part of buffer end to begin to handle pattern potentially straddling buffer border
     size_t offset = 0;
     while ((rd = read(fd, buffer.data() + offset, bufSize - offset)) > 0)
     {
