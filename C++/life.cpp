@@ -10,6 +10,10 @@ int main()
         p = &i;
         std::vector<double> v2 = v1;
     }
-    std::cout << *p << std::endl;
+    if (p) 
+    {
+        // compiler correctly rejects this code 
+        // std::cout << *p << std::endl;
+    }
 }
 

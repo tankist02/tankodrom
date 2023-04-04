@@ -6,7 +6,8 @@ ifeq ($(BUILD_TYPE),)
     BUILD_TYPE=release
 endif
 
-COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -Wno-restrict -std=c++20
+COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20
+#COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20 -fanalyzer
 
 ifeq ($(BUILD_TYPE),debug)
 	CXXFLAGS += $(COMP_FLAGS) -O0 -g3
