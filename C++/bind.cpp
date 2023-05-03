@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     v.push_back(4);
     std::cout << (std::find_if(v.begin(), v.end(), equal_to_4) != v.end()) << std::endl;
 
-    std::cout << (std::find_if(v.begin(), v.end(), std::bind2nd(std::equal_to<int>(), 4)) != v.end()) << std::endl;
+    std::cout << (std::find_if(v.begin(), v.end(), std::bind(std::equal_to<int>(), std::placeholders::_1, 4)) != v.end()) << std::endl;
 
     std::cout << (std::find_if(v.begin(), v.end(), [](int i) { return i == 4; }) != v.end()) << std::endl;
 

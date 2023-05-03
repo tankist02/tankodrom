@@ -24,11 +24,15 @@ int main(int argc, char* argv[])
 {
     try
     {
-        std::size_t pos;
-        auto res = std::stod(argv[1], &pos);
-        std::cout << "res: " << res << ", pos: " << pos << ", input len: " << strlen(argv[1]) << std::endl;
+        std::cout.precision(16);
+        std::cout.setf(std::ios_base::scientific);
 
-        /*if (argc < 3)
+        /*std::size_t pos;
+        auto res = std::stod(argv[1], &pos);
+        std::cout << "argv[1]: " << argv[1] << ", res: " << res << ", pos: " << pos << ", input len: " << strlen(argv[1]) << std::endl;
+        */
+
+        if (argc < 3)
         {
             std::ostringstream os;
             os << "Usage: " << argv[0] << " <loops> <arg1 [arg2...]>";
@@ -38,11 +42,9 @@ int main(int argc, char* argv[])
         long loops = atoi(argv[1]);
         std::cout << "loops: " << loops << std::endl;
 
-        run(loops, argc, argv, atof);
-        run(loops, argc, argv, std::stod);*/
+        //run(loops, argc, argv, atof);
+        //run(loops, argc, argv, std::stod);
 
-        //std::cout.precision(16);
-        //std::cout.setf(std::ios_base::scientific);
         /*for (int i = 1; i < argc; ++i)
         {
             double res = std::stod(argv[i]);
@@ -55,7 +57,6 @@ int main(int argc, char* argv[])
             std::cout << "argv: " << argv[i] << ", res: " << res << std::endl;
         }*/
 
-        /*
         clock_t c = clock();
         for (long l = 0; l < loops; ++l)
         {
@@ -68,36 +69,63 @@ int main(int argc, char* argv[])
                 }
             }
         }
-        std::cout << "Time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
+        std::cout << "atof time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
 
         c = clock();
         for (long l = 0; l < loops; ++l)
         {
             for (int i = 1; i < argc; ++i)
             {
-                double res = atof(argv[i]);
+                double res = strtod(argv[i], nullptr);
                 if (res < 0.0)
                 {
                     std::cout << "argv: " << argv[i] << ", res: " << res << std::endl;
                 }
             }
         }
-        std::cout << "Time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
+        std::cout << "strtod time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
 
         c = clock();
         for (long l = 0; l < loops; ++l)
         {
             for (int i = 1; i < argc; ++i)
             {
-                double res = atof(argv[i]);
+                double res = strtold(argv[i], nullptr);
                 if (res < 0.0)
                 {
                     std::cout << "argv: " << argv[i] << ", res: " << res << std::endl;
                 }
             }
         }
-        std::cout << "Time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
-        */
+        std::cout << "strtold time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
+
+        c = clock();
+        for (long l = 0; l < loops; ++l)
+        {
+            for (int i = 1; i < argc; ++i)
+            {
+                double res = std::stod(argv[i]);
+                if (res < 0.0)
+                {
+                    std::cout << "argv: " << argv[i] << ", res: " << res << std::endl;
+                }
+            }
+        }
+        std::cout << "std::stod time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
+
+        c = clock();
+        for (long l = 0; l < loops; ++l)
+        {
+            for (int i = 1; i < argc; ++i)
+            {
+                double res = std::stold(argv[i]);
+                if (res < 0.0)
+                {
+                    std::cout << "argv: " << argv[i] << ", res: " << res << std::endl;
+                }
+            }
+        }
+        std::cout << "std::stold time: " << double(clock() - c) / CLOCKS_PER_SEC << std::endl;
     }
     catch (std::exception const& e)
     {

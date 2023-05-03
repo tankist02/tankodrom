@@ -33,8 +33,8 @@ int main()
 
     //std::array<std::pair<int, int>, 3> ps = {{{1, 1}, {2, 2}, {3, 3}}};
     std::vector<std::pair<int, int>> ps = {{{1, 1}, {2, 2}, {3, 3}}};
-    std::copy(ps.begin(), ps.end(), std::ostream_iterator<std::pair<int, int>>(std::cout, "\n"));
-    //std::cout << ps[0] << std::endl;
-    //for (auto const& el : ps) { std::cout << el.first << "," << el.second << std::endl; }
+    // does not compile? std::copy(ps.begin(), ps.end(), std::ostream_iterator<std::pair<int, int>>(std::cout, "\n"));
+    std::cout << ps[0] << std::endl;
+    for (auto const& el : ps) { std::cout << el.first << "," << el.second << std::endl; }
 }
 
