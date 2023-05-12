@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fmt/format.h>
+#include <format>
 
 double getPrint(int repeats)
 {
@@ -40,7 +40,7 @@ double getFmt(int repeats)
     clock_t s = clock();
     for (int i = 0; i < repeats; ++i)
     {
-        fmt::print("Hello, World!\n");
+        // not implemented yet std::print("Hello, World!\n");
     }
     s = clock() - s;
     return (double)s / CLOCKS_PER_SEC;
@@ -48,7 +48,7 @@ double getFmt(int repeats)
 
 int main(int argc, char* argv[])
 {
-    fmt::print("The answer is {:d}\n", 42);
+    std::cout << std::format("The answer is {:d}\n", 42);
     int repeats = 100;
 
     if (argv[1])

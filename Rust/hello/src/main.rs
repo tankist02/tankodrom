@@ -10,13 +10,15 @@ fn foo(i: i32) -> i32 {
 fn bar(i: i32) -> i32 {
     let b = 1;
     if i > 0 {
-        b
+        return b;
     }
     -1
 }
 
 fn main() {
     println!("Hello, world!");
+    foo(1);
+    bar(-1);
 	let mut v : Vec<i32> = Vec::new();
     v.push(40);
     println!("{:?}", v);

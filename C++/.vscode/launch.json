@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/data/dev/FP/C++",
-      "program": "/data/dev/FP/C++/build/Debug/outDebug",
+      "program": "/data/dev/FP/C++/adl",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <numeric>
+#include <vector>
 
 // Fold expression since C++17
 template <typename... Values>

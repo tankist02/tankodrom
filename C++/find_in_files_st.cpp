@@ -10,6 +10,9 @@
 #include <thread>
 #include <cerrno>
 #include <cstring>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 
 using Strings = std::vector<std::string>;
 using StrSpan = std::span<std::string const>;
@@ -32,7 +35,7 @@ void loadStrings(std::string const& fname, Strings& toFind)
     std::cout << "Number of strings to find: " << toFind.size() << std::endl;
 }
 
-char* loadFile(char const* fname, size_t size)
+char* loadFile(char const* fname, size_t& size)
 {
     int fd = open(fname, O_RDONLY);
     if (fd < 0)

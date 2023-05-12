@@ -10,7 +10,8 @@
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-std=c++20"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -28,7 +29,30 @@
 			"type": "process",
 			"label": "build active file",
 			"command": "make",
-			"args": ["${fileBasenameNoExtension}"]
+			"args": [
+				"${fileBasenameNoExtension}"
+			]
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ build active file",
+			"command": "/usr/lib64/ccache/g++",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-std=c++20"
+			], 
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/lib64/ccache/g++"
 		}
 	]
 }
