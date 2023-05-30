@@ -9,3 +9,6 @@ RUN apt-get -y update && apt-get -y upgrade
 
 RUN apt-get -y install build-essential g++ clang-15 clang-tidy-15 valgrind gdb
 
+RUN groupadd -g 1000 andrew && useradd -l -u 1000 -g andrew andrew
+USER andrew
+

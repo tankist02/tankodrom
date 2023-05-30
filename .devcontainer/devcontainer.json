@@ -1,0 +1,6 @@
+{
+    "name": "Ubuntu Dev Container",
+    "dockerFile": "Dockerfile",
+    "containerUser": "andrew",
+    "remoteUser": "andrew",
+}
