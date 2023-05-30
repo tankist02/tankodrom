@@ -8,7 +8,11 @@
 		"--security-opt",
 		"seccomp=unconfined"
 	],
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
+	"customizations":{
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			}
+		}
 	}
 }
