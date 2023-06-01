@@ -1,5 +1,5 @@
 #include <iostream>
-#include <format>
+//#include <format>
 
 double getPrint(int repeats)
 {
@@ -48,7 +48,8 @@ double getFmt(int repeats)
 
 int main(int argc, char* argv[])
 {
-    std::cout << std::format("The answer is {:d}\n", 42);
+    // std::format is not yet fully supported
+    //std::cout << std::format("The answer is {:d}\n", 42);
     int repeats = 100;
 
     if (argv[1])

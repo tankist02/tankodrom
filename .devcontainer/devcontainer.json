@@ -3,21 +3,29 @@
     "dockerFile": "Dockerfile",
     "containerUser": "andrew",
     "remoteUser": "andrew",
-	"runArgs": [
-		"--cap-add=SYS_PTRACE",
-		"--security-opt",
-		"seccomp=unconfined"
-	],
-	"customizations":{
-		"vscode": {
-			"settings": {
-				"terminal.integrated.profiles.linux": {
-					"bash": {
-						"path": "/bin/bash"
-					}
-				},
-				"terminal.integrated.defaultProfile.linux": "bash"
-			}
-		}
-	}
+    "runArgs": [
+        "--cap-add=SYS_PTRACE",
+        "--security-opt",
+        "seccomp=unconfined"
+    ],
+    "customizations":{
+        "vscode": {
+            "settings": {
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"eamodio.gitlens"
+			]
+        }
+    },
+    "mounts": [
+        "source=/data/dev/tests,target=/workspaces/tests,type=bind,consistency=cached"
+    ]
 }
