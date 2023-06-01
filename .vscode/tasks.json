@@ -7,6 +7,22 @@
             "label": "echo",
             "type": "shell",
             "command": "echo Hello"
+        },
+        {
+            "label": "Clean C++ samples",
+            "type": "shell",
+            "command": "make -C ${workspaceRoot}/C++ -j `nproc` clean; ",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "Build C++ samples",
+            "type": "shell",
+            "command": "cd ${workspaceRoot}/C++; ./build_all.sh; cd -",
+            "problemMatcher": "$gcc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
