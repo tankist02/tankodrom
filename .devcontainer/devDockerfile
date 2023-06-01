@@ -2,10 +2,8 @@ FROM ubuntu:latest
 
 ENV TZ="America/Los_Angeles"
 
-RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker
-RUN echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker
-
-RUN apt-get -y update && apt-get -y upgrade
-
-RUN apt-get -y install build-essential g++ clang-15 clang-tidy-15 valgrind gdb sudo git
+RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker \
+    && echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker \
+    && apt-get -y update && apt-get -y upgrade \
+    && apt-get -y install build-essential g++ clang-15 clang-tidy-15 libboost1.74-all-dev valgrind gdb sudo git
 
