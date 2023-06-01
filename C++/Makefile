@@ -23,6 +23,6 @@ endif
 #LDFLAGS += -lfmt
 
 clean:
-	find . -type f -perm -555 | grep -v \.sh$ | xargs rm -f
+	find . -type f -perm -555 | grep -v \.sh$$ | xargs rm -f
 	rm -f *.o
 
