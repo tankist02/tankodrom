@@ -1,5 +1,5 @@
 {
-    "name": "Andrew Dev Container",
+    "name": "Andrew Container",
     "dockerFile": "Dockerfile",
     "containerUser": "andrew",
     "remoteUser": "andrew",
@@ -25,6 +25,8 @@
 			]
         }
     },
+    "workspaceMount": "source=/data/dev/FP,target=/FP,type=bind,consistency=cached",
+    "workspaceFolder": "/FP",
     "mounts": [
         "source=/data/dev/tests,target=/workspaces/tests,type=bind,consistency=cached"
     ]
