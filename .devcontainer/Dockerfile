@@ -1,9 +1,9 @@
 #FROM ubuntu:latest
 FROM dev:1.0
 
-ARG USER_NAME=andrew
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
+ARG USER_NAME=tester
+ARG USER_UID=1001
+ARG USER_GID=1003
 
 RUN groupadd --gid $USER_GID $USER_NAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USER_NAME
