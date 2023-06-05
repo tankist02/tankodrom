@@ -17,12 +17,12 @@
                     }
                 },
                 "terminal.integrated.defaultProfile.linux": "bash"
-			},
-			"extensions": [
-				"ms-vscode.cpptools",
-				"ms-vscode.cpptools-extension-pack",
-				"eamodio.gitlens"
-			]
+            },
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "eamodio.gitlens"
+            ]
         }
     },
     "mounts": [
