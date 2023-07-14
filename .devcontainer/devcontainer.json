@@ -1,7 +1,8 @@
 {
     "name": "Andrew Container",
     //"dockerFile": "Dockerfile",
-    "image": "andrew:1.0",
+    //"image": "andrew:1.0",
+    "image": "tester:1.0",
     "containerUser": "andrew",
     "remoteUser": "andrew",
     "runArgs": [
