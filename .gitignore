@@ -9,3 +9,5 @@ target
 *.er
 *.txt
 *.text
+*.lock
+
