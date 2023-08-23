@@ -28,6 +28,21 @@ fn main() {
     let r = (1..n + 1).collect::<Vec<_>>().iter().fold(1, |acc, x| acc * x);
     println!("{:?}", r);
 
+    /*let i = 1;
+    let j = 0;
+    let k = i / j;
+    println!("{k}");*/
+
+    let j = 10;
+    for i in 0..10 {
+        let k = j / i;
+        println!("{:?}", k);
+    }
+
+    let f = 1.0;
+    let d = f / 0.0;
+    println!("{d}");
+
     //let mul = i.iter().fold(1, |acc, x| acc * x);
     //let mul = [1..3].iter().fold(1, |acc, x| acc * x);
     //println!("{mul}")
