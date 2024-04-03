@@ -23,6 +23,6 @@ endif
 #LDFLAGS += -lfmt
 
 clean:
-	find . -type f -executable | xargs rm -f
+	find . -type f -executable | grep -v \.sh$ | xargs rm -f
 	rm -f *.o
 
