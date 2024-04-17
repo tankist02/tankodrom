@@ -1,4 +1,8 @@
-CXXFLAGS=-O2 -Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20
+CXXFLAGS += -Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20 \
+	-I`jemalloc-config --includedir`
+
+#LDFLAGS += -L`jemalloc-config --libdir` -ljemalloc
+LDFLAGS += -ljemalloc
 #COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20 -fanalyzer
 
 clean:
