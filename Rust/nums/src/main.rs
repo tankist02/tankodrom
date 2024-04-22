@@ -11,12 +11,12 @@ fn main() {
     println!("fl: {:?}", fl);
 
     let nums = vec!(1, 2, 3);
-    for n in nums {
+    for n in &nums {
         println!("n: {}", n);
     }
 
-    /* nums moved because of implicit iter_into
+    // nums will be moved above if passed by value, not reference (because of implicit iter_into)
     for n in nums {
         println!("n: {}", n);
-    } */
+    }
 }
