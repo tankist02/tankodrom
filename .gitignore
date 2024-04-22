@@ -11,4 +11,3 @@ target
 *.text
 *.lock
 rustlings
-
