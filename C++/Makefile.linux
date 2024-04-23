@@ -12,9 +12,9 @@ COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter 
 ifeq ($(BUILD_TYPE),debug)
 	CXXFLAGS += $(COMP_FLAGS) -O0 -g3
 else ifeq ($(BUILD_TYPE),release)
-	CXXFLAGS += $(COMP_FLAGS) -O3 -g
+	CXXFLAGS += $(COMP_FLAGS) -O2 -g
 else ifeq ($(BUILD_TYPE),profile)
-	CXXFLAGS += $(COMP_FLAGS) -O3 -pg -g
+	CXXFLAGS += $(COMP_FLAGS) -O2 -pg -g
 	LFLAGS += -pg
 else
 $(error: Invalid BUILD_TYPE: $(BUILD_TYPE))
