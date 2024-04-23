@@ -39,6 +39,6 @@ void process(int clock_type, char const* msg)
 int main(int argc, char* argv[])
 {
     process(CLOCK_REALTIME, "realtime");
-    process(CLOCK_REALTIME_COARSE, "realtime");
+    process(CLOCK_REALTIME_COARSE, "realtimecoarse");
 }
 
