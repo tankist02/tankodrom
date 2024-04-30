@@ -1,0 +1,4 @@
+To build with optimization for high speed:
+
+rustc -C opt-level=3 counter.rs
+
