@@ -15,23 +15,31 @@ std::string prettyPrint(long value)
     return res;
 }
 
-//bool cont = true;
-std::atomic_bool cont = true;
+//volatile bool cont = true;
+std::atomic<bool> cont = true;
+//std::atomic_bool cont = true;
+//std::atomic_flag cont = ATOMIC_FLAG_INIT;
 
 void sleeper()
 {
     usleep(1000000);
     //usleep(1000);
     cont = false;
+    //cont.store(false, std::memory_order_relaxed);
+    //cont.clear();
 }
 
 void counter(long& count)
 {
     while (cont) { ++count; }
+    //while (cont.load(std::memory_order_relaxed)) { ++count; }
+    //while (cont.test_and_set()) { ++count; }
 }
 
 int main(int argc, char* argv[])
 {
+    //cont.store(true, std::memory_order_relaxed);
+    //cont.test_and_set();
     //auto start = clock();
     struct timespec start, stop;
     clock_gettime(CLOCK_REALTIME, &start);
