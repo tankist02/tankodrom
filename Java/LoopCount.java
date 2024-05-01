@@ -1,5 +1,5 @@
 package hello;
-import java.text.DecimalFormat;
+//import java.text.DecimalFormat;
 
 public class LoopCount {
     static volatile boolean stop = false;
@@ -21,8 +21,9 @@ public class LoopCount {
             if (stop) break;
         }
         end = System.currentTimeMillis();
-       	DecimalFormat formatter = new DecimalFormat("#,###");
-        System.out.println("start: " + start + "\n end: " + end + "\ncount: " + formatter.format(count));
+       	//DecimalFormat formatter = new DecimalFormat("#,###");
+        //System.out.println("start: " + start + "\n end: " + end + "\ncount: " + formatter.format(count));
+        System.out.println("start: " + start + "\n  end: " + end + "\ncount: " + String.format("%,d", count));
     }
 
     public static void main(String args[]) {
