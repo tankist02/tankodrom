@@ -78,4 +78,46 @@ fn main() {
     let data = vec![1, 2];
     let f2 = File::new_data("bar", data);
     println!("f1: {:?}, f2: {:?}", f1, f2);
+
+    #[derive(Debug)]
+    struct Person {
+        name: String,
+        age: i32,
+    }
+
+    impl Person {
+        fn new(n: &str, a: i32) -> Self {
+            Person { name: n.to_string(), age: a }
+        }
+    }
+
+    let p1 = Person { name: "John".to_string(), age: 30 };
+    println!("p1: {:?}", p1);
+
+    let p2 = Person::new("Paul", 40);
+    println!("p2: {:?}", p2);
+
+    #[derive(Debug)]
+    struct Complex {
+        re: f64,
+        im: f64,
+    }
+
+    impl Complex {
+        fn add(&self, r: f64, i: f64) -> Self {
+            Complex { re: self.re + r, im: self.im + i }
+        }
+
+        fn incr(&mut self, r: f64, i: f64) -> &mut Self {
+            self.re += r;
+            self.im += i;
+            self
+        }
+    }
+
+    let mut c1 = Complex { re: 1.0, im: 2.0 };
+    println!("c1: {:?}", c1);
+
+    c1.incr(1.0, 2.0);
+    println!("c1: {:?}", c1);
 }
