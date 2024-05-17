@@ -109,4 +109,16 @@ fn main() {
     if let Err(s) = get_even(1) {
         println!("s: {s}");
     }
+
+    let my_vec = vec![1, 2, 3];
+    for index in 0..5 {
+        if let Some(number) = my_vec.get(index) {
+            println!("number: {}", number);
+        }
+        let Some(number) = my_vec.get(index) else
+        {
+            continue;
+        };
+        println!("number: {}", number);
+    }
 }
