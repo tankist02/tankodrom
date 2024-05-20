@@ -57,7 +57,8 @@ fn main() {
 
     use std::time::Instant;
 
-    let size = 500_000;
+    //let size = 500_000;
+    let size = 50_000;
 
     let now = Instant::now();
     let mut v = vec![1; size];
@@ -69,7 +70,50 @@ fn main() {
     let now = Instant::now();
     let mut vd = VecDeque::from(vec![1; size]);
     for _ in 0..size {
-        vd.remove(0);
+        //vd.remove(0);
+        vd.pop_front();
     }
     println!("Elapsed: {:?}", now.elapsed());
+
+    // Get array size from context below
+    //let arr: [usize; 10] = core::array::from_fn(|i| i * 2);
+    let arr = core::array::from_fn(|i| i * 2);
+    println!("arr: {:?}", arr);
+    assert_eq!(arr, [0, 2]);
+    // size from context conflicts with this assert_eq!(arr, [1, 2, 3]);
+    
+    use std::num::ParseIntError;
+    fn parse_and_log(input: &str) -> Result<i32, ParseIntError> {
+        let res = match input.parse::<i32>() {
+            Ok(number) => number,
+            Err(e) => return Err(e),
+        };
+        println!("parsed number: {}", res);
+        Ok(res)
+    }
+
+    fn parse_and_logq(input: &str) -> Result<i32, ParseIntError> {
+        let res = input.parse::<i32>()?; // get i32 or returns Err
+        println!("parsed: {}", res);
+        Ok(res)
+    }
+
+    let res = parse_and_log("1");
+    println!("res: {:?}", res);
+
+    let res = parse_and_log("abc");
+    println!("res: {:?}", res);
+
+    let res = parse_and_log("1.23");
+    println!("res: {:?}", res);
+
+    let res = parse_and_logq("1");
+    println!("res: {:?}", res);
+
+    let res = parse_and_logq("abc");
+    println!("res: {:?}", res);
+
+    let res = parse_and_logq("1.23");
+    println!("res: {:?}", res);
+
 }

@@ -6,6 +6,8 @@ ifeq ($(BUILD_TYPE),)
     BUILD_TYPE=release
 endif
 
+BUILD_TYPE:=debug
+
 COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20
 #COMP_FLAGS=-Wall -Wextra -Wpedantic -Werror -Wfloat-equal -Wno-unused-parameter -std=c++20 -fanalyzer
 
