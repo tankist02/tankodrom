@@ -58,7 +58,9 @@ int main(int argc, char* argv[])
         {
             str = strings[4];
             for (size_t j = 1; j < i; ++j)
-                 str += strings[j % sizeof(strings) / sizeof(strings[0])];
+            {
+                str += strings[j % sizeof(strings) / sizeof(strings[0])];
+            }
         }
 
         std::size_t found = str.find("A");
