@@ -46,13 +46,15 @@ int main(int argc, char* argv[])
         //std::cout << "i: " << i << ", str: " << str << std::endl;
         //if (i == loops - 1) { std::cout << "str len: " << str.size() << std::endl; }
 
-        std::size_t found = str.find("A");
-        if (found != std::string::npos) { ++count; }
+        std::size_t pos = str.find('A');
+        if (pos != std::string::npos) { count += 1; }
 
-        found = str.rfind("z");
-        if (found != std::string::npos) { ++count; }
+        pos = str.find('z');
+        if (pos != std::string::npos) { count += 1; }
+        
+        //std::cout << "str: " << str << ", count: " << count << std::endl;
     }
-    std::cout << "str: " << str << std::endl;
+    std::cout << "str size: " << str.size() << std::endl;
     std::cout << "count: " << count << std::endl;
 }
 
