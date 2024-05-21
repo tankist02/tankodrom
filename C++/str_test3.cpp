@@ -34,33 +34,10 @@ int main(int argc, char* argv[])
 
     for (size_t i = 0; i < loops; ++i)
     {
-        if (i == 1)
+        str.resize(0);
+        for (size_t j = 1; j < i; ++j)
         {
-           str = strings[0];
-        }
-        else if (i == 2)
-        {
-           str = strings[0]; str += strings[1];
-        }
-        else if (i == 3)
-        {
-           str = strings[1]; str += strings[2]; str += strings[0];
-        }
-        else if (i == 4)
-        {
-           str = strings[3]; str += strings[1]; str += strings[2]; str += strings[0];
-        }
-        else if (i == 5)
-        {
-           str = strings[3]; str += strings[1]; str += strings[2]; str += strings[0]; str += strings[4];
-        }
-        else
-        {
-            str = strings[4];
-            for (size_t j = 1; j < i; ++j)
-            {
-                str += strings[j % sizeof(strings) / sizeof(strings[0])];
-            }
+            str += strings[j % sizeof(strings) / sizeof(strings[0])];
         }
 
         /*if (i == loops - 1)
