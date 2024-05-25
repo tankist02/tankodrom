@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
 
     long count = 0;
     
-    auto thr1 = std::jthread(sleeper);
-    auto thr2 = std::jthread(counter, std::ref(count));
+    auto thr1 = std::thread(sleeper);
+    auto thr2 = std::thread(counter, std::ref(count));
     thr1.join();
     thr2.join();
 

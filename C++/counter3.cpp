@@ -22,7 +22,7 @@ std::atomic<bool> cont = true;
 
 void sleeper()
 {
-    usleep(1000000);
+    usleep(1'000'000);
     //usleep(1000);
     cont = false;
     //cont.store(false, std::memory_order_relaxed);
