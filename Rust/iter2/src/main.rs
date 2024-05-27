@@ -34,7 +34,7 @@ fn main() {
     println!("{k}");*/
 
     let j = 10;
-    for i in 0..10 {
+    for i in 1..10 {
         let k = j / i;
         println!("{:?}", k);
     }
