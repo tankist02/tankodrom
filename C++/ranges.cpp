@@ -1,16 +1,22 @@
 #include <algorithm>
 #include <iostream>
 #include <ranges>
+#include <list>
 #include <vector>
 
 void printc(auto const& col)
 {
-
     for (size_t i = 0; auto const& e : col)
     {
         if (i++ > 0) { std::cout << ", "; }
         std::cout << e;
     }
+    std::cout << '\n';
+}
+
+void print(auto const& col)
+{
+    for (auto const& e : col) { std::cout << e << ' '; }
     std::cout << '\n';
 }
 
@@ -38,5 +44,11 @@ int main(int argc, char* argv[])
     std::ranges::sort(cities[0]);
     printc(cities);
     printc(cities[0]);
+
+    std::vector v {1, 2, 3, 4};
+    std::list l {1, 2, 3, 4};
+
+    print(v);
+    print(l);
 }
 

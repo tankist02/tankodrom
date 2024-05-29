@@ -13,6 +13,8 @@ ifeq ($(BUILD_TYPE),debug)
 	CXXFLAGS += $(COMP_FLAGS) -O0 -g3
 else ifeq ($(BUILD_TYPE),release)
 	CXXFLAGS += $(COMP_FLAGS) -O2 -g
+else ifeq ($(BUILD_TYPE),checked)
+	CXXFLAGS += $(COMP_FLAGS) -O0 -g -D_GLIBCXX_DEBUG
 else ifeq ($(BUILD_TYPE),profile)
 	CXXFLAGS += $(COMP_FLAGS) -O2 -pg -g
 	LFLAGS += -pg
