@@ -1,12 +1,11 @@
-"execute pathogen#infect()
-syntax on
-filetype plugin indent on
-"Plug 'prabirshrestha/vim-lsp'
+set exrc
 "set nocompatible
+syntax on
 "set wildmenu
 "set showmode
 set background=dark
 "set background=light
+
 "set backspace=2
 "set history=50
 set autoindent
@@ -19,23 +18,36 @@ set expandtab
 
 "set nomodeline
 set number
-"set cursorline
-"set tags=tags;/
-set undodir=/home/andrew/.vimundo
-set undofile
 
-"to switch from modified buffer
-set hidden
+"hi CursorLine cterm=NONE ctermbg=blue ctermfg=white
+"set cursorline
+"set cursorlineopt=number
+"autocmd ColorScheme * highlight CursorLineNr cterm=bold term=bold gui=bold
+"autocmd ColorScheme * highlight CursorLineNr
+
+" Highlight only current line number
+set cursorline
+hi clear CursorLine
+highlight CursorLineNr cterm=NONE ctermbg=blue ctermfg=white
+
+"set tags=tags;/
+set undofile
+set undodir=/home/andrew/.vimundo
 
 map <F2> :w<CR>
 map <F3> :cp<CR>
 map <F4> :cn<CR>
 map <F5> :buffers<CR>:buffer<Space>
-map <F6> :make -j`nproc` clean<CR>
+map <F6> :make -j8 clean<CR>
 "build current file as program
-map <F7> :make BUILD_TYPE=debug -j`nproc` '%:r'<CR>
-map <F8> :make BUILD_TYPE=release -j`nproc` '%:r'<CR>
-map <F9> :make BUILD_TYPE=debug CXX=clang++ -j`nproc` '%:r'<CR>
+" FreeBSD map <F7> :w<CR>:make -j`sysctl -n hw.ncpu` '%:r'<CR>
+"map <F7> :w<CR>:make -j `nproc` '%:r' BUILD_TYPE=debug<CR>
+"Save current buffer, build current prog, run it
+map <F7> :w<CR>:make -j `nproc` '%:r' BUILD_TYPE=debug<CR>
+map <F8> :w<CR>:make -j `nproc` '%:r' BUILD_TYPE=checked && ./'%:r'<CR>
+map <F9> :w<CR>:make -j `nproc` '%:r' BUILD_TYPE=protect && ./'%:r'<CR>
+map <F10> :w<CR>:make -j `nproc` '%:r' && ./'%:r'<CR>
+"map <F11> :w<CR>:make -j `nproc` '%:r' && ./'%:r' BUILD_TYPE=debug<CR>
 map <F12> :Ex<CR>
 
 "au BufWritePost *.c,*.cpp,*.h silent! !~/bin/tags_update.sh &

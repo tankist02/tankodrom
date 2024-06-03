@@ -12,15 +12,14 @@ fn vec_proc(len: usize) -> Vec<usize> {
 
 fn sum_proc(v: &[usize]) -> usize {
     let mut s = 0;
-    for i in 0..v.len() {
-        s += v[i];
+    for i in v {
+        s += *i;
     }
     s
 }
 
 fn vec_iter(len: usize) -> Vec<usize> {
-    let v = (0..len).collect();
-    v
+    (0..len).collect()
 }
 
 fn sum_iter(v: &[usize]) -> usize {
@@ -73,4 +72,20 @@ fn main() {
     }
 
     println!("tl: {}, sum: {}, iter elapsed: {:?}", tl, sum, now.elapsed());
+
+    let v1 = vec![1, 2, 3];
+    let v1_a = v1.iter().map(|i| i + 1).collect::<Vec<i32>>();
+    println!("v1: {:?}, v1_a: {:?}", v1, v1_a);
+
+    let mut v2 = vec![5, 6, 7];
+    let v2_a = v2.iter().map(|i| i + 1).collect::<Vec<i32>>();
+    let v2_b = v2.iter().map(|i| *i + 1).collect::<Vec<i32>>();
+    println!("v2: {:?}, v2_a: {:?}, v2_b: {:?}", v2, v2_a, v2_b);
+
+    v2.iter_mut().for_each(|i| *i *= 2);
+    println!("v2: {:?}", v2);
+
+    let v3 = v2.into_iter().map(|i| i / 2).collect::<Vec<i32>>();
+    println!("v3: {:?}", v3);
+    //println!("v3: {:?}, v2: {:?}", v3, v2);
 }
