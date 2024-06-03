@@ -1,4 +1,5 @@
 use std::thread;
+use std::collections::HashMap;
 
 #[derive(Debug, Copy, Clone)]
 enum ShirtColor {
@@ -70,4 +71,20 @@ fn main() {
 
     let v3 = vec![1, 2, 3];
     thread::spawn(move || println!("From thread: {:?}", v3)).join().unwrap();
+
+    // "inlined" closure needs extra () around it
+    let n1 = 1;
+    let n2 = 2;
+    let cl = || println!("n1 + n2: {}", n1 + n2);
+    cl();
+
+    let v = ["a", "b", "c"];
+    v.iter().enumerate().for_each(|(i, s)| println!("i: {}, s: {}", i, s));
+
+    let keys = [1, 2, 3];
+    let vals = ["one", "two", "three", "four"];
+    let hm = keys.iter().zip(vals.iter()).collect::<HashMap<_, _>>();
+
+    println!("hm: {:?}", hm);
 }
+
