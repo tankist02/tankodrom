@@ -86,5 +86,66 @@ fn main() {
     let hm = keys.iter().zip(vals.iter()).collect::<HashMap<_, _>>();
 
     println!("hm: {:?}", hm);
+
+    let arr = [1, 2, 3, 4];
+    let f = arr.into_iter().filter(|n| *n < 3).collect::<Vec<i32>>();
+    println!("f: {:?}", f);
+    let f = arr.iter().filter(|n| *n < &3).collect::<Vec<&i32>>();
+    println!("f: {:?}", f);
+
+    let input = ["1", "one", "2", "two"];
+    let nums = input.iter().filter_map(|s| s.parse::<i32>().ok()).collect::<Vec<i32>>();
+    println!("nums: {:?}", nums);
+
+    fn test(s: &String) -> Result<&String, &'static str> {
+        println!("test: s: {}, len: {}", s, s.len());
+        if !s.is_empty() { 
+            Ok(s) 
+        } 
+        else { 
+            Err("empty string") 
+        }
+    }
+    let s = "".to_string();
+    let res = test(&s);
+    println!("res: {:?}", res);
+    let s = "Hello".to_string();
+    let res = test(&s);
+    println!("res: {:?}", res);
+
+    fn test2(s: String) -> Result<String, &'static str> {
+        println!("test: s: {}, len: {}", s, s.len());
+        if !s.is_empty() { 
+            Ok(s) 
+        } 
+        else { 
+            Err("empty string") 
+        }
+    }
+    let s = "".to_string();
+    let res = test2(s);
+    println!("res: {:?}", res);
+    let s = "Hello".to_string();
+    let res = test2(s);
+    println!("res: {:?}", res);
+
+    fn test3(s: &str) -> Result<&str, &'static str> {
+        println!("test: s: {}, len: {}", s, s.len());
+        if !s.is_empty() { 
+            Ok(s) 
+        } 
+        else { 
+            Err("empty string") 
+        }
+    }
+    let s = "";
+    let res = test3(s);
+    println!("res: {:?}", res);
+    let s = "Hello";
+    let res = test3(s);
+    println!("res: {:?}", res);
+    let s = "World!".to_string();
+    let res = test3(&s);
+    println!("res: {:?}", res);
 }
 
