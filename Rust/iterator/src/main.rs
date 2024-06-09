@@ -88,4 +88,14 @@ fn main() {
     let v3 = v2.into_iter().map(|i| i / 2).collect::<Vec<i32>>();
     println!("v3: {:?}", v3);
     //println!("v3: {:?}, v2: {:?}", v3, v2);
+    
+    fn find_char_in_vec(v: &Vec<char>, ch: char) {
+        //let res = v.iter().any(|c| *c == ch);
+        let res = v.iter().any(|&c| c == ch);
+        println!("char: {}, res: {}", ch, res);
+    }
+
+    let v = ('a'..'z').collect::<Vec<char>>();
+    find_char_in_vec(&v, 'a');
+    find_char_in_vec(&v, '0');
 }
