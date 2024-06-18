@@ -1,3 +1,4 @@
+set hidden
 set exrc
 syntax on
 set background=dark
@@ -20,6 +21,8 @@ highlight CursorLineNr cterm=NONE ctermbg=blue ctermfg=white
 
 set undofile
 set undodir=/home/andrew/.vimundo
+
+compiler cargo
 
 map <F2> :w<CR>
 map <F3> :cp<CR>
