@@ -3,7 +3,7 @@
 #include <vector>
 
 // Array is almost 2 times faster than vector even though the code is almost the same
-//#define USE_ARRAY
+#define USE_ARRAY
 
 // Function to create a string of size len filled with symbols from charset looping around
 static std::string gen_str(size_t len)
