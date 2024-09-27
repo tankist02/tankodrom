@@ -1,9 +1,10 @@
-#include <cstdio>
-#include <iostream>
-//#include <format>
+#include <fmt/core.h>
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Hello, world!\n";
+    fmt::print("Hello, world!\n");
+
+    auto s = fmt::format("The answer is {}", 42);
+    fmt::print("s: {}", s);
 }
 

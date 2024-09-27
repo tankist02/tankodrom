@@ -8,7 +8,8 @@ fn main() {
 
     let now = Instant::now();
 
-    let loops = 100_000_000;
+    //let loops = 100_000_000;
+    let loops = 100_000;
     let mut sum = 0;
 
     for _ in 0..loops {
