@@ -22,7 +22,7 @@ else
 $(error: Invalid BUILD_TYPE: $(BUILD_TYPE))
 endif
 
-LDFLAGS += -lfmt -lunwind
+#LDFLAGS += -lfmt -lunwind
 
 clean:
 	find . -type f -executable | grep -v \.sh$ | xargs rm -f
